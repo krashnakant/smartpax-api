@@ -19,22 +19,23 @@ export class ItemsService {
   }
 
   async findAllItems(user_id: number, item_type: string): Promise<Item[]> {
-    let items = await this.itemRepository.findAll<Item>({where: {user_id, item_type}})    
-    let allitems = await Promise.all(items.map(async (item) => {
-      let children = await this.itemRepository.findAll<Item>({where: {user_id,parent_id: item.id}})
+    let items = await this.itemRepository.findAll<Item>({where: {user_id}})    
+    let itemtypes = items.filter((item) => item.item_type == item_type)
+    let allitems = itemtypes.map((item) => {
+      let children = items.filter((i) => i.parent_id == item.id)
       item.dataValues.children = children;
-      let furtherChildren = await Promise.all(children.map(async (child) => {
-        let childs_children = await this.itemRepository.findAll<Item>({where: {user_id,parent_id: child.id}})
+      children.map((child) => {
+        let childs_children = items.filter((i) => i.parent_id == child.id)
         child.dataValues.children = childs_children;
         return child;
-      }))
+      });
       return item;
-    }));
+    })
     return allitems;
   }
 
-  async getItems(user_id: number, item_type: string): Promise<any> {
-    const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, item_type: item_type}});    
+  async findAllWorkspaces(user_id: number, item_type: string): Promise<any> {
+    const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, item_type: 'workspace'}});    
     let responseJSON = { "user_id": user_id, "workspace": workspaces, "dashboard": [], status: 200 };
     return responseJSON; 
   }
