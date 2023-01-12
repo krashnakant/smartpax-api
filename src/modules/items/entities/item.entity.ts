@@ -31,4 +31,6 @@ export class Item extends Model<Item> {
     })
     item_type: string;
 
+    children:Item[];
+
 }

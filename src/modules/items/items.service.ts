@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ITEM_REPOSITORY } from 'src/core/constants';
 import { CreateItemDto } from './dto/create-item.dto';
+import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { Item } from './entities/item.entity';
 
@@ -17,8 +18,19 @@ export class ItemsService {
     return await this.itemRepository.findAll<Item>();
   }
 
-  async findAllWorkspaces(user_id: number, item_type: string): Promise<Item[]> {
-    return await this.itemRepository.findAll<Item>({where: {user_id, item_type}});
+  async findAllItems(user_id: number, item_type: string): Promise<Item[]> {
+    let items = await this.itemRepository.findAll<Item>({where: {user_id, item_type}})    
+    let allitems = await Promise.all(items.map(async (item) => {
+      let children = await this.itemRepository.findAll<Item>({where: {user_id,parent_id: item.id}})
+      item.dataValues.children = children;
+      let furtherChildren = await Promise.all(children.map(async (child) => {
+        let childs_children = await this.itemRepository.findAll<Item>({where: {user_id,parent_id: child.id}})
+        child.dataValues.children = childs_children;
+        return child;
+      }))
+      return item;
+    }));
+    return allitems;
   }
 
   async getItems(user_id: number, item_type: string): Promise<any> {
