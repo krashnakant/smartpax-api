@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
+import { Res } from '@nestjs/common/decorators';
+import { Response } from 'express';
 
 @Controller('items')
 export class ItemsController {
@@ -30,5 +32,15 @@ export class ItemsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.itemsService.remove(+id);
+  }
+
+  @Get('menuitems/:user_id')
+  async getMenuItems(@Param() {user_id}, @Res() res: Response) {
+    let workspaces = await this.itemsService.findAllWorkspaces(user_id, 'workspace');
+    let dashboards = await this.itemsService.findAllWorkspaces(user_id, 'dashboard');
+    let responseJSON = { "user_id": user_id, "workspace": workspaces, "dashboard": dashboards, status: 200 };
+    console.log("test",responseJSON);
+    //return responseJSON;
+    res.status(200).send(responseJSON);
   }
 }

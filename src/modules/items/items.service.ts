@@ -17,6 +17,16 @@ export class ItemsService {
     return await this.itemRepository.findAll<Item>();
   }
 
+  async findAllWorkspaces(user_id: number, item_type: string): Promise<Item[]> {
+    return await this.itemRepository.findAll<Item>({where: {user_id, item_type}});
+  }
+
+  async getItems(user_id: number, item_type: string): Promise<any> {
+    const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, item_type: item_type}});    
+    let responseJSON = { "user_id": user_id, "workspace": workspaces, "dashboard": [], status: 200 };
+    return responseJSON; 
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} item`;
   }
@@ -28,4 +38,6 @@ export class ItemsService {
   remove(id: number) {
     return `This action removes a #${id} item`;
   }
+
+  
 }
