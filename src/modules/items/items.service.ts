@@ -36,7 +36,7 @@ export class ItemsService {
 
   async findAllWorkspaces(user_id: number, item_type: string): Promise<any> {
     const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, item_type: 'workspace'}});    
-    let responseJSON = { "user_id": user_id, "workspace": workspaces, "dashboard": [], status: 200 };
+    let responseJSON = {data :{ "user_id": user_id, "workspace": workspaces, "dashboard": [], status: 200 }};
     return responseJSON; 
   }
 

@@ -38,7 +38,7 @@ export class ItemsController {
   async getMenuItems(@Param() {user_id}, @Res() res: Response) {
     let workspaces = await this.itemsService.findAllItems(user_id, 'workspace');
     let dashboards = await this.itemsService.findAllItems(user_id, 'dashboard');
-    let responseJSON = { "user_id": user_id, "workspace": workspaces, "dashboard": dashboards, status: 200 };
+    let responseJSON = {"data": { "user_id": user_id, "workspaces": workspaces, "dashboards": dashboards, status: 200 }};
     //console.log("test",responseJSON);
     //return responseJSON;
     res.status(200).send(responseJSON);
