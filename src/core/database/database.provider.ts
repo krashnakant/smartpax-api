@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { Columndropdown } from 'src/modules/columndropdowns/entities/columndropdown.entity';
 import { Columnperson } from 'src/modules/columnpeople/entities/columnperson.entity';
-import { Column } from 'src/modules/columns/entities/column.entity';
+import { GColumn } from 'src/modules/columns/entities/column.entity';
 import { Columnstatus } from 'src/modules/columnstatuses/entities/columnstatus.entity';
 import { Defaultcolumndropdown } from 'src/modules/defaultcolumndropdowns/entities/defaultcolumndropdown.entity';
 import { Defaultcolumnperson } from 'src/modules/defaultcolumnpeople/entities/defaultcolumnperson.entity';
@@ -48,7 +48,7 @@ export const databaseProviders = [
         Defaultcolumndropdown,
         Defaultcolumnperson,
         Defaultcolumnstatus,
-        Column,
+        GColumn,
         Columndropdown,
         Columnperson,
         Columnstatus,

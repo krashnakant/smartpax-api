@@ -1,4 +1,6 @@
-import { Table, Column, Model, DataType, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { Defaultcolumnperson } from 'src/modules/defaultcolumnpeople/entities/defaultcolumnperson.entity';
+import { Defaultcolumn } from 'src/modules/defaultcolumns/entities/defaultcolumn.entity';
 import { Item } from 'src/modules/items/entities/item.entity';
 
 @Table
@@ -38,5 +40,10 @@ export class User extends Model<User> {
 
     @HasMany(() => Item)
     items?: Item[]
+
+    //----------------------many to many
+    @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnperson)
+    dropdowns: Defaultcolumnperson[];
+    //--------------------
 
 }

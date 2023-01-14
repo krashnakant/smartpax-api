@@ -1,6 +1,26 @@
-import { Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Defaultcolumn } from "src/modules/defaultcolumns/entities/defaultcolumn.entity";
+import { User } from "src/modules/users/entities/user.entity";
 
 @Table
-export class Defaultcolumnperson extends Model<Defaultcolumnperson> {}
+export class Defaultcolumnperson extends Model<Defaultcolumnperson> {
+    //--------------------many to one
+    @ForeignKey(() => Defaultcolumn)
+    @Column
+    default_column_id: number;
+
+    @BelongsTo(() => Defaultcolumn)
+    default_column:Defaultcolumn
+    //--------------------
+
+    //--------------------many to one
+    @ForeignKey(() => User)
+    @Column
+    user_id: number;
+
+    @BelongsTo(() => User)
+    user:User
+    //--------------------
+}
 
 

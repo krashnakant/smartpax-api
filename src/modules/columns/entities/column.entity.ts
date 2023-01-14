@@ -1,7 +1,20 @@
-import { Model, Table } from "sequelize-typescript";
+import { Model, Table, Column, DataType } from "sequelize-typescript";
 
 @Table
-export class Column extends Model<Column> {}
+export class GColumn extends Model<GColumn> {
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    column_name: string;
+
+    @Column({
+        type: DataType.ENUM,
+        values: ['text', 'integer','date','status','dropdown','people','formula'],
+        allowNull: false,
+    })
+    datatype: string;
+}
 
 
 
