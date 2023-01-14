@@ -17,6 +17,11 @@ export class StatusvaluesController {
     return this.statusvaluesService.findAll();
   }
 
+  @Get("findallbystatusid/:status_id")
+  findAllByStatusId(@Param('status_id') status_id: number){
+    return this.statusvaluesService.findAllByStatusId(status_id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.statusvaluesService.findOne(+id);

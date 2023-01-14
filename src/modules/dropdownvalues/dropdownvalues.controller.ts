@@ -31,4 +31,9 @@ export class DropdownvaluesController {
   remove(@Param('id') id: string) {
     return this.dropdownvaluesService.remove(+id);
   }
+
+  @Get("findallbydropdownid/:dropdown_id")
+  findAllByDropdownId(@Param('dropdown_id') dropdown_id: number){
+    return this.dropdownvaluesService.findAllByDropdownId(dropdown_id);
+  }
 }

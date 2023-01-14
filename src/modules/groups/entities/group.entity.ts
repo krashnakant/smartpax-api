@@ -1,5 +1,6 @@
 import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Item } from 'src/modules/items/entities/item.entity';
+import { Row } from 'src/modules/rows/entities/row.entity';
 
 @Table
 export class Group extends Model<Group> {
@@ -30,7 +31,8 @@ export class Group extends Model<Group> {
     })
     isOpen: boolean;
 
-    rows:any[];
+    @HasMany(() => Row)
+    rows: Row[]
 
 
 

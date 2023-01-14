@@ -1,15 +1,24 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,Inject } from '@nestjs/common';
+import { ROW_REPOSITORY } from 'src/core/constants';
 import { CreateRowDto } from './dto/create-row.dto';
 import { UpdateRowDto } from './dto/update-row.dto';
+import { Row } from './entities/row.entity';
 
 @Injectable()
 export class RowsService {
-  create(createRowDto: CreateRowDto) {
-    return 'This action adds a new row';
+
+  constructor(@Inject(ROW_REPOSITORY) private readonly rowRepository: typeof Row) { }
+
+  async create(createRowDto: CreateRowDto): Promise<Row> {
+    return await this.rowRepository.create<Row>(createRowDto);
   }
 
-  findAll() {
-    return `This action returns all rows`;
+  async findOneById(id: number): Promise<Row> {
+    return await this.rowRepository.findOne<Row>({ where: { id } });
+  }
+
+  async findAll(): Promise<Row[]> {
+    return await this.rowRepository.findAll<Row>();
   }
 
   findOne(id: number) {

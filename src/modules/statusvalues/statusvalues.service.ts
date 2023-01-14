@@ -1,15 +1,28 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { STATUSVALUE_REPOSITORY } from 'src/core/constants';
 import { CreateStatusvalueDto } from './dto/create-statusvalue.dto';
 import { UpdateStatusvalueDto } from './dto/update-statusvalue.dto';
+import { Statusvalue } from './entities/statusvalue.entity';
 
 @Injectable()
 export class StatusvaluesService {
-  create(createStatusvalueDto: CreateStatusvalueDto) {
-    return 'This action adds a new statusvalue';
+
+  constructor(@Inject(STATUSVALUE_REPOSITORY) private readonly statusvalueRepository: typeof Statusvalue) { }
+
+  async create(createStatusvalueDto: CreateStatusvalueDto): Promise<Statusvalue> {
+    return await this.statusvalueRepository.create<Statusvalue>(createStatusvalueDto);
   }
 
-  findAll() {
-    return `This action returns all statusvalues`;
+  async findOneById(id: number): Promise<Statusvalue> {
+    return await this.statusvalueRepository.findOne<Statusvalue>({ where: { id } });
+  }
+
+  async findAll(): Promise<Statusvalue[]> {
+    return await this.statusvalueRepository.findAll<Statusvalue>();
+  }
+
+  async findAllByStatusId(status_id: number): Promise<Statusvalue[]> {
+    return await this.statusvalueRepository.findAll<Statusvalue>({ where: { status_id } });
   }
 
   findOne(id: number) {

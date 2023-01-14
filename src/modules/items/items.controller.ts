@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete,Res } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
-import { Res } from '@nestjs/common/decorators';
 import { Response } from 'express';
 
 @Controller('items')
@@ -34,7 +33,7 @@ export class ItemsController {
     return this.itemsService.remove(+id);
   }
 
-  @Get('menuitems/:user_id')
+  @Get('menuitems/:user_id')  
   async getMenuItems(@Param() {user_id}, @Res() res: Response) {
     let workspaces = await this.itemsService.findAllItems(user_id, 'workspace');
     let dashboards = await this.itemsService.findAllItems(user_id, 'dashboard');

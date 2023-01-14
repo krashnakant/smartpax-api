@@ -1,4 +1,5 @@
-import { Column, DataType, Table, Model } from "sequelize-typescript";
+import { Column, DataType, Table, Model, HasMany } from "sequelize-typescript";
+import { Statusvalue } from "src/modules/statusvalues/entities/statusvalue.entity";
 
 @Table
 export class Status extends Model<Status> {
@@ -7,4 +8,7 @@ export class Status extends Model<Status> {
         allowNull: false,
     })
     name: string;
+
+    @HasMany(() => Statusvalue)
+    statusvalues: Statusvalue[]
 }

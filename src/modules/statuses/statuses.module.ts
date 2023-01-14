@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { StatusesService } from './statuses.service';
 import { StatusesController } from './statuses.controller';
 import { statusesProviders } from './statuses.provider';
+import { statusvaluesProviders } from '../statusvalues/statusvalues.provider';
 
 @Module({
   controllers: [StatusesController],
-  providers: [StatusesService, ...statusesProviders]
+  providers: [StatusesService, ...statusesProviders, ...statusvaluesProviders]
 })
 export class StatusesModule {}

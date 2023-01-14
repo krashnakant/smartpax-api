@@ -1,1 +1,3 @@
-export class CreateDropdownDto {}
+export class CreateDropdownDto {
+    readonly name:string
+}
