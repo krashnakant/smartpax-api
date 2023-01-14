@@ -1,4 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
+import { Defaultcolumn } from 'src/modules/defaultcolumns/entities/defaultcolumn.entity';
+import { Group } from 'src/modules/groups/entities/group.entity';
 import { Item } from 'src/modules/items/entities/item.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
@@ -22,7 +24,7 @@ export const databaseProviders = [{
            config = databaseConfig.development;
         }
         const sequelize = new Sequelize(config);
-        sequelize.addModels([User,Item]);
+        sequelize.addModels([User,Item,Group,Defaultcolumn]);
         await sequelize.sync();
         return sequelize;
     },

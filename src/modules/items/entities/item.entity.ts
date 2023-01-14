@@ -1,4 +1,5 @@
 import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
+import { Group } from 'src/modules/groups/entities/group.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 
 @Table
@@ -31,6 +32,11 @@ export class Item extends Model<Item> {
     })
     item_type: string;
 
+    @HasMany(() => Group)
+    groups: Group[]
+
     children:Item[];
+
+    
 
 }
