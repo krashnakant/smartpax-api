@@ -20,10 +20,21 @@ import { ColumndropdownsModule } from './modules/columndropdowns/columndropdowns
 import { StatusesModule } from './modules/statuses/statuses.module';
 import { StatusvaluesModule } from './modules/statusvalues/statusvalues.module';
 import { InvitationsModule } from './modules/invitations/invitations.module';
+import { InvitationitemsModule } from './modules/invitationitems/invitationitems.module';
+import { ColumnvaluesModule } from './modules/columnvalues/columnvalues.module';
+import { SortModule } from './modules/sorts/sorts.module';
+import { FiltersModule } from './modules/filters/filters.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
+import { ChartcategorysModule } from './modules/chartcategorys/chartcategorys.module';
+import { CharttypesModule } from './modules/charttypes/charttypes.module';
+import { ChartsModule } from './modules/charts/charts.module';
+import { ChartsettingsModule } from './modules/chartsettings/chartsettings.module';
+import { ChartsettinggroupsModule } from './modules/chartsettinggroups/chartsettinggroups.module';
+import { BenchmarksModule } from './modules/benchmarks/benchmarks.module';
 
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumnpeopleModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule, InvitationsModule],
+  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumnpeopleModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule, InvitationsModule, InvitationitemsModule, ColumnvaluesModule, SortModule, FiltersModule, PermissionsModule, ChartcategorysModule, CharttypesModule, ChartsModule, ChartsettingsModule, ChartsettinggroupsModule, BenchmarksModule,],
   controllers: [AppController],
   providers: [AppService],
 })
