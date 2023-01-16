@@ -19,10 +19,11 @@ import { ColumnpeopleModule } from './modules/columnpeople/columnpeople.module';
 import { ColumndropdownsModule } from './modules/columndropdowns/columndropdowns.module';
 import { StatusesModule } from './modules/statuses/statuses.module';
 import { StatusvaluesModule } from './modules/statusvalues/statusvalues.module';
+import { InvitationsModule } from './modules/invitations/invitations.module';
 
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumnpeopleModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule],
+  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumnpeopleModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule, InvitationsModule],
   controllers: [AppController],
   providers: [AppService],
 })
