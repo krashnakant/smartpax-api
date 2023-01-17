@@ -19,6 +19,36 @@ export class GColumn extends Model<GColumn> {
     })
     datatype: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    formula?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    unit_position?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    unit?: string;
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false
+    })
+    hidden: boolean;
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false
+    })
+    order: number;
+
     //--------------------many to one
     @ForeignKey(() => Status)
     @Column({
