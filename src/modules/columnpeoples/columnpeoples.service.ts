@@ -2,19 +2,19 @@ import { Injectable, Inject } from '@nestjs/common';
 import { COLUMNPEOPLE_REPOSITORY } from 'src/core/constants';
 import { CreateColumnpeopleDto } from './dto/create-columnperson.dto';
 import { UpdateColumnpeopleDto } from './dto/update-columnperson.dto';
-import { Columnpeople } from './entities/columnperson.entity';
+import { Columnperson } from './entities/columnperson.entity';
 
 @Injectable()
 export class ColumnpeoplesService {
 
-  constructor(@Inject(COLUMNPEOPLE_REPOSITORY) private readonly columnpeopleRepository: typeof Columnpeople) { }
+  constructor(@Inject(COLUMNPEOPLE_REPOSITORY) private readonly columnpeopleRepository: typeof Columnperson) { }
 
-  async create(createColumnpeopleDto: CreateColumnpeopleDto): Promise<Columnpeople> {
-    return await this.columnpeopleRepository.create<Columnpeople>(createColumnpeopleDto);
+  async create(createColumnpeopleDto: CreateColumnpeopleDto): Promise<Columnperson> {
+    return await this.columnpeopleRepository.create<Columnperson>(createColumnpeopleDto);
   }
 
-  async findAll(): Promise<Columnpeople[]> {
-    return await this.columnpeopleRepository.findAll<Columnpeople>();
+  async findAll(): Promise<Columnperson[]> {
+    return await this.columnpeopleRepository.findAll<Columnperson>();
   }
 
 

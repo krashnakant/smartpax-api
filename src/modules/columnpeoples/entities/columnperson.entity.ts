@@ -3,7 +3,7 @@ import { GColumn } from 'src/modules/columns/entities/column.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 
 @Table
-export class Columnpeople extends Model<Columnpeople> {
+export class Columnperson extends Model<Columnperson> {
 
     //--------------------many to one
     @ForeignKey(() => GColumn)
