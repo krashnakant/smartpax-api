@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ColumnpeoplesService } from './columnpeoples.service';
-import { CreateColumnpeopleDto } from './dto/create-columnpeople.dto';
-import { UpdateColumnpeopleDto } from './dto/update-columnpeople.dto';
+import { CreateColumnpeopleDto } from './dto/create-columnperson.dto';
+import { UpdateColumnpeopleDto } from './dto/update-columnperson.dto';
 
 @Controller('columnpeoples')
 export class ColumnpeoplesController {

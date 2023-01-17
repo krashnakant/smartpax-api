@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { COLUMNPEOPLE_REPOSITORY } from 'src/core/constants';
-import { CreateColumnpeopleDto } from './dto/create-columnpeople.dto';
-import { UpdateColumnpeopleDto } from './dto/update-columnpeople.dto';
-import { Columnpeople } from './entities/columnpeople.entity';
+import { CreateColumnpeopleDto } from './dto/create-columnperson.dto';
+import { UpdateColumnpeopleDto } from './dto/update-columnperson.dto';
+import { Columnpeople } from './entities/columnperson.entity';
 
 @Injectable()
 export class ColumnpeoplesService {
