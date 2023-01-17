@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { StatusesService } from './statuses.service';
 import { CreateStatusDto } from './dto/create-status.dto';
 import { UpdateStatusDto } from './dto/update-status.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('statuses')
 export class StatusesController {
@@ -13,13 +15,17 @@ export class StatusesController {
   }
 
   @Get()
-  findAll() {
-    return this.statusesService.findAll();
+  async findAll(@Res() res: Response) {
+    let cstatuses = await this.statusesService.findAll();
+    let responseJSON = {"data": { "cstatuses": cstatuses, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.statusesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let cstatus = await this.statusesService.findOne(+id);
+    let responseJSON = {"data": { "cstatus": cstatus, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

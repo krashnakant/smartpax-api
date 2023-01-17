@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CharttypesService } from './charttypes.service';
 import { CreateCharttypeDto } from './dto/create-charttype.dto';
 import { UpdateCharttypeDto } from './dto/update-charttype.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('charttypes')
 export class CharttypesController {
@@ -13,13 +15,17 @@ export class CharttypesController {
   }
 
   @Get()
-  findAll() {
-    return this.charttypesService.findAll();
+  async findAll(@Res() res: Response) {
+    let charttypes = await this.charttypesService.findAll();
+    let responseJSON = {"data": { "charttypes": charttypes, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.charttypesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let charttype = await this.charttypesService.findOne(+id);
+    let responseJSON = {"data": { "charttype": charttype, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

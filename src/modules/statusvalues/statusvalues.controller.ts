@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { StatusvaluesService } from './statusvalues.service';
 import { CreateStatusvalueDto } from './dto/create-statusvalue.dto';
 import { UpdateStatusvalueDto } from './dto/update-statusvalue.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('statusvalues')
 export class StatusvaluesController {
@@ -13,8 +15,10 @@ export class StatusvaluesController {
   }
 
   @Get()
-  findAll() {
-    return this.statusvaluesService.findAll();
+  async findAll(@Res() res: Response) {
+    let statusvalues = await this.statusvaluesService.findAll();
+    let responseJSON = {"data": { "statusvalues": statusvalues, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get("findallbystatusid/:status_id")
@@ -23,8 +27,10 @@ export class StatusvaluesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.statusvaluesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let statusvalue = await this.statusvaluesService.findOne(+id);
+    let responseJSON = {"data": { "statusvalue": statusvalue, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

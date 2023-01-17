@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('users')
 export class UsersController {
@@ -13,13 +15,17 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll(@Res() res: Response) {
+    let users = await this.usersService.findAll();
+    let responseJSON = {"data": { "users": users, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let user = await this.usersService.findOne(+id);
+    let responseJSON = {"data": { "user": user, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

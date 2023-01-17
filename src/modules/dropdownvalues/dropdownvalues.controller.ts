@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DropdownvaluesService } from './dropdownvalues.service';
 import { CreateDropdownvalueDto } from './dto/create-dropdownvalue.dto';
 import { UpdateDropdownvalueDto } from './dto/update-dropdownvalue.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('dropdownvalues')
 export class DropdownvaluesController {
@@ -13,13 +15,18 @@ export class DropdownvaluesController {
   }
 
   @Get()
-  findAll() {
-    return this.dropdownvaluesService.findAll();
+  async findAll(@Res() res: Response) {
+    let dropdownvalues = await this.dropdownvaluesService.findAll();
+    let responseJSON = {"data": { "dropdownvalues": dropdownvalues, status: 200 }};
+    res.status(200).send(responseJSON);
+    return 
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.dropdownvaluesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let dropdownvalue = await this.dropdownvaluesService.findOne(+id);
+    let responseJSON = {"data": { "dropdownvalue": dropdownvalue, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

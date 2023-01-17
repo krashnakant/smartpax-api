@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ColumnpeoplesService } from './columnpeoples.service';
 import { CreateColumnpeopleDto } from './dto/create-columnperson.dto';
 import { UpdateColumnpeopleDto } from './dto/update-columnperson.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('columnpeoples')
 export class ColumnpeoplesController {
@@ -13,13 +15,17 @@ export class ColumnpeoplesController {
   }
 
   @Get()
-  findAll() {
-    return this.columnpeoplesService.findAll();
+  async findAll(@Res() res: Response) {
+    let columnpeoples = await this.columnpeoplesService.findAll();
+    let responseJSON = {"data": { "columnpeoples": columnpeoples, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.columnpeoplesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let columnpeople = await this.columnpeoplesService.findOne(+id);
+    let responseJSON = {"data": { "columnpeople": columnpeople, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

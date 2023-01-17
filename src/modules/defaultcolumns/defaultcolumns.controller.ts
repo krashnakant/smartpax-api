@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DefaultcolumnsService } from './defaultcolumns.service';
 import { CreateDefaultcolumnDto } from './dto/create-defaultcolumn.dto';
 import { UpdateDefaultcolumnDto } from './dto/update-defaultcolumn.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('defaultcolumns')
 export class DefaultcolumnsController {
@@ -13,13 +15,17 @@ export class DefaultcolumnsController {
   }
 
   @Get()
-  findAll() {
-    return this.defaultcolumnsService.findAll();
+  async findAll(@Res() res: Response) {
+    let defaultcolumns = await this.defaultcolumnsService.findAll();
+    let responseJSON = {"data": { "defaultcolumns": defaultcolumns, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.defaultcolumnsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let defaultcolumn = await this.defaultcolumnsService.findOne(+id);
+    let responseJSON = {"data": { "defaultcolumn": defaultcolumn, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

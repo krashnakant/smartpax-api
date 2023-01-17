@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { BenchmarksService } from './benchmarks.service';
 import { CreateBenchmarkDto } from './dto/create-benchmark.dto';
 import { UpdateBenchmarkDto } from './dto/update-benchmark.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('benchmarks')
 export class BenchmarksController {
@@ -13,13 +15,17 @@ export class BenchmarksController {
   }
 
   @Get()
-  findAll() {
-    return this.benchmarksService.findAll();
+  async findAll(@Res() res: Response) {
+    let benchmarks = await this.benchmarksService.findAll();
+    let responseJSON = {"data": { "benchmarks": benchmarks, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.benchmarksService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let benchmark = await this.benchmarksService.findOne(+id);
+    let responseJSON = {"data": { "benchmark": benchmark, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

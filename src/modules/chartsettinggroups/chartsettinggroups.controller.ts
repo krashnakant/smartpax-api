@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ChartsettinggroupsService } from './chartsettinggroups.service';
 import { CreateChartsettinggroupDto } from './dto/create-chartsettinggroup.dto';
 import { UpdateChartsettinggroupDto } from './dto/update-chartsettinggroup.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('chartsettinggroups')
 export class ChartsettinggroupsController {
@@ -13,13 +15,17 @@ export class ChartsettinggroupsController {
   }
 
   @Get()
-  findAll() {
-    return this.chartsettinggroupsService.findAll();
+  async findAll(@Res() res: Response) {
+    let chartsettinggroups = await this.chartsettinggroupsService.findAll();
+    let responseJSON = {"data": { "chartsettinggroups": chartsettinggroups, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.chartsettinggroupsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let chartsettinggroup = await this.chartsettinggroupsService.findOne(+id);
+    let responseJSON = {"data": { "chartsettinggroup": chartsettinggroup, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')
