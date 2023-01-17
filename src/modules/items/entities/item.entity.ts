@@ -1,4 +1,5 @@
 import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
+import { GColumn } from 'src/modules/columns/entities/column.entity';
 import { Group } from 'src/modules/groups/entities/group.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 
@@ -36,6 +37,9 @@ export class Item extends Model<Item> {
     groups: Group[]
 
     children:Item[];
+
+    @HasMany(() => GColumn)
+    columns: GColumn[]
 
     
 

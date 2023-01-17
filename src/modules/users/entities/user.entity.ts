@@ -1,4 +1,5 @@
 import { Table, Column, Model, DataType, HasMany, BelongsToMany } from 'sequelize-typescript';
+import { GColumn } from 'src/modules/columns/entities/column.entity';
 import { Defaultcolumnperson } from 'src/modules/defaultcolumnpeople/entities/defaultcolumnperson.entity';
 import { Defaultcolumn } from 'src/modules/defaultcolumns/entities/defaultcolumn.entity';
 import { Item } from 'src/modules/items/entities/item.entity';
@@ -40,6 +41,9 @@ export class User extends Model<User> {
 
     @HasMany(() => Item)
     items?: Item[]
+
+    @HasMany(() => GColumn)
+    columns: GColumn[]
 
     //----------------------many to many
     @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnperson)

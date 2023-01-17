@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ItemsService } from './items.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
 import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('items')
 export class ItemsController {
@@ -14,13 +15,17 @@ export class ItemsController {
   }
 
   @Get()
-  findAll() {
-    return this.itemsService.findAll();
+  async findAll(@Res() res: Response) {
+    let items = await this.itemsService.findAll();
+    let responseJSON = {"data": { "items": items, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let item = await this.itemsService.findOne(+id);
+    let responseJSON = {"data": { "item": item, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

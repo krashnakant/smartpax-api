@@ -1,4 +1,5 @@
 import { Column, DataType, Table, Model, HasMany, BelongsToMany } from "sequelize-typescript";
+import { GColumn } from "src/modules/columns/entities/column.entity";
 import { Defaultcolumn } from "src/modules/defaultcolumns/entities/defaultcolumn.entity";
 import { Defaultcolumnstatus } from "src/modules/defaultcolumnstatuses/entities/defaultcolumnstatus.entity";
 import { Statusvalue } from "src/modules/statusvalues/entities/statusvalue.entity";
@@ -13,6 +14,9 @@ export class Status extends Model<Status> {
 
     @HasMany(() => Statusvalue)
     statusvalues: Statusvalue[]
+
+    @HasMany(() => GColumn)
+    columns: GColumn[]
 
     //----------------------many to many
     @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnstatus)
