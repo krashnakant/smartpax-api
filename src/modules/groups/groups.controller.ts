@@ -15,13 +15,17 @@ export class GroupsController {
   }
 
   @Get()
-  findAll() {
-    return this.groupsService.findAll();
+  async findAll(@Res() res: Response) {
+    let groups = await this.groupsService.findAll();
+    let responseJSON = {"data": { "groups": groups, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.groupsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let group = await this.groupsService.findOne(+id);
+    let responseJSON = {"data": { "group": group, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

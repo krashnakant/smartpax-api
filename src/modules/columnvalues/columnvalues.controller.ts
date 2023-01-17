@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ColumnvaluesService } from './columnvalues.service';
 import { CreateColumnvalueDto } from './dto/create-columnvalue.dto';
 import { UpdateColumnvalueDto } from './dto/update-columnvalue.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('columnvalues')
 export class ColumnvaluesController {
@@ -13,13 +15,17 @@ export class ColumnvaluesController {
   }
 
   @Get()
-  findAll() {
-    return this.columnvaluesService.findAll();
+  async findAll(@Res() res: Response) {
+    let columnvalues = await this.columnvaluesService.findAll();
+    let responseJSON = {"data": { "columnvalues": columnvalues, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.columnvaluesService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let columnvalue = await this.columnvaluesService.findOne(+id);
+    let responseJSON = {"data": { "columnvalue": columnvalue, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

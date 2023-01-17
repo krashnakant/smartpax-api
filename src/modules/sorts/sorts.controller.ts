@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { SortService } from './sorts.service';
 import { CreateSortDto } from './dto/create-sort.dto';
 import { UpdateSortDto } from './dto/update-sort.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('sort')
 export class SortController {
@@ -13,13 +15,17 @@ export class SortController {
   }
 
   @Get()
-  findAll() {
-    return this.sortService.findAll();
+  async findAll(@Res() res: Response) {
+    let sorts = await this.sortService.findAll();
+    let responseJSON = {"data": { "sorts": sorts, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.sortService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let sort = await this.sortService.findOne(+id);
+    let responseJSON = {"data": { "sort": sort, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

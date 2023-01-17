@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FiltersService } from './filters.service';
 import { CreateFilterDto } from './dto/create-filter.dto';
 import { UpdateFilterDto } from './dto/update-filter.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('filters')
 export class FiltersController {
@@ -13,13 +15,17 @@ export class FiltersController {
   }
 
   @Get()
-  findAll() {
-    return this.filtersService.findAll();
+  async findAll(@Res() res: Response) {
+    let filters = await this.filtersService.findAll();
+    let responseJSON = {"data": { "filters": filters, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.filtersService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let filter = await this.filtersService.findOne(+id);
+    let responseJSON = {"data": { "filter": filter, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')

@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { InvitationitemsService } from './invitationitems.service';
 import { CreateInvitationitemDto } from './dto/create-invitationitem.dto';
 import { UpdateInvitationitemDto } from './dto/update-invitationitem.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('invitationitems')
 export class InvitationitemsController {
@@ -13,13 +15,16 @@ export class InvitationitemsController {
   }
 
   @Get()
-  findAll() {
-    return this.invitationitemsService.findAll();
+  async findAll(@Res() res: Response) {
+    let invitationitems = await this.invitationitemsService.findAll();
+    let responseJSON = {"data": { "invitationitems": invitationitems, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.invitationitemsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let invitationitem = await this.invitationitemsService.findOne(+id);
+    let responseJSON = {"data": { "invitationitem": invitationitem, status: 200 }};
   }
 
   @Patch(':id')

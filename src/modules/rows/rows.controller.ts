@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { RowsService } from './rows.service';
 import { CreateRowDto } from './dto/create-row.dto';
 import { UpdateRowDto } from './dto/update-row.dto';
+import { Response } from 'express';
+import { Res } from '@nestjs/common/decorators';
 
 @Controller('rows')
 export class RowsController {
@@ -13,13 +15,17 @@ export class RowsController {
   }
 
   @Get()
-  findAll() {
-    return this.rowsService.findAll();
+  async findAll(@Res() res: Response) {
+    let rows = await this.rowsService.findAll();
+    let responseJSON = {"data": { "rows": rows, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rowsService.findOne(+id);
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    let row = await this.rowsService.findOne(+id);
+    let responseJSON = {"data": { "row": row, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Patch(':id')
