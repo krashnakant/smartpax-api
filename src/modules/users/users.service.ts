@@ -13,12 +13,12 @@ export class UsersService {
     return await this.userRepository.create<User>(createUserDto);
   }
 
-  async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { id } });
-  }
-
   async findAll(): Promise<User[]> {
     return await this.userRepository.findAll<User>();
+  }
+
+  async findOneById(id: number): Promise<User> {
+    return await this.userRepository.findOne<User>({ where: { id } });
   }
 
   async findOneByUserId(user_id: string): Promise<User> {

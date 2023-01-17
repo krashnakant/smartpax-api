@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { INVITATION_REPOSITORY } from 'src/core/constants';
 import { CreateInvitationDto } from './dto/create-invitation.dto';
 import { UpdateInvitationDto } from './dto/update-invitation.dto';
+import { Invitation } from './entities/invitation.entity';
 
 @Injectable()
 export class InvitationsService {
-  create(createInvitationDto: CreateInvitationDto) {
-    return 'This action adds a new invitation';
+
+  constructor(@Inject(INVITATION_REPOSITORY) private readonly invitationRepository: typeof Invitation) { }
+
+  async create(createInvitationDto: CreateInvitationDto): Promise<Invitation> {
+    return await this.invitationRepository.create<Invitation>(createInvitationDto);
   }
 
-  findAll() {
-    return `This action returns all invitations`;
+  async findAll(): Promise<Invitation[]> {
+    return await this.invitationRepository.findAll<Invitation>();
   }
+
 
   findOne(id: number) {
     return `This action returns a #${id} invitation`;

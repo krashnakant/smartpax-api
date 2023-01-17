@@ -21,18 +21,30 @@ export class Defaultcolumn extends Model<Defaultcolumn> {
     })
     datatype: string;
 
-    //----------------------many to many
-    @BelongsToMany(() => Dropdown, () => Defaultcolumndropdown)
-    dropdowns: Defaultcolumndropdown[];
+    //--------------------one to one
+    @ForeignKey(() => Dropdown)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: false
+    })
+    dropdown_id?: number;
+
+    @BelongsTo(() => Dropdown)
+    dropdown?:Dropdown
     //--------------------
 
-    //----------------------many to many
-    @BelongsToMany(() => User, () => Defaultcolumnperson)
-    people: Defaultcolumnperson[];
-    //--------------------
+    // //----------------------many to many
+    // @BelongsToMany(() => Dropdown, () => Defaultcolumndropdown)
+    // dropdowns: Defaultcolumndropdown[];
+    // //--------------------
 
-    //----------------------many to many
-    @BelongsToMany(() => Status, () => Defaultcolumnstatus)
-    status: Defaultcolumnstatus[];
-    //--------------------
+    // //----------------------many to many
+    // @BelongsToMany(() => User, () => Defaultcolumnperson)
+    // people: Defaultcolumnperson[];
+    // //--------------------
+
+    // //----------------------many to many
+    // @BelongsToMany(() => Status, () => Defaultcolumnstatus)
+    // status: Defaultcolumnstatus[];
+    // //--------------------
 }
