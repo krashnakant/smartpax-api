@@ -15,7 +15,6 @@ import { DefaultcolumndropdownsModule } from './modules/defaultcolumndropdowns/d
 import { DefaultcolumnpeopleModule } from './modules/defaultcolumnpeople/defaultcolumnpeople.module';
 import { DefaultcolumnstatusesModule } from './modules/defaultcolumnstatuses/defaultcolumnstatuses.module';
 import { ColumnstatusesModule } from './modules/columnstatuses/columnstatuses.module';
-import { ColumnpeopleModule } from './modules/columnpeople/columnpeople.module';
 import { ColumndropdownsModule } from './modules/columndropdowns/columndropdowns.module';
 import { StatusesModule } from './modules/statuses/statuses.module';
 import { StatusvaluesModule } from './modules/statusvalues/statusvalues.module';
@@ -31,10 +30,11 @@ import { ChartsModule } from './modules/charts/charts.module';
 import { ChartsettingsModule } from './modules/chartsettings/chartsettings.module';
 import { ChartsettinggroupsModule } from './modules/chartsettinggroups/chartsettinggroups.module';
 import { BenchmarksModule } from './modules/benchmarks/benchmarks.module';
+import { ColumnpeoplesModule } from './modules/columnpeoples/columnpeoples.module';
 
 
 @Module({
-  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumnpeopleModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule, InvitationsModule, InvitationitemsModule, ColumnvaluesModule, SortModule, FiltersModule, PermissionsModule, ChartcategorysModule, CharttypesModule, ChartsModule, ChartsettingsModule, ChartsettinggroupsModule, BenchmarksModule,],
+  imports: [DatabaseModule, ConfigModule.forRoot({isGlobal:true}), UsersModule, ItemsModule, GroupsModule, DefaultcolumnsModule, DropdownsModule, DropdownvaluesModule, ColumnsModule, RowsModule, DefaultcolumndropdownsModule, DefaultcolumnpeopleModule, DefaultcolumnstatusesModule, ColumnstatusesModule, ColumndropdownsModule, StatusesModule, StatusvaluesModule, InvitationsModule, InvitationitemsModule, ColumnvaluesModule, SortModule, FiltersModule, PermissionsModule, ChartcategorysModule, CharttypesModule, ChartsModule, ChartsettingsModule, ChartsettinggroupsModule, BenchmarksModule, ColumnpeoplesModule,],
   controllers: [AppController],
   providers: [AppService],
 })
