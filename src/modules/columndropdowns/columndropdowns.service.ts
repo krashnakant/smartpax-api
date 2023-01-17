@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { COLUMNDROPDOWN_REPOSITORY } from 'src/core/constants';
 import { CreateColumndropdownDto } from './dto/create-columndropdown.dto';
 import { UpdateColumndropdownDto } from './dto/update-columndropdown.dto';
+import { Columndropdown } from './entities/columndropdown.entity';
 
 @Injectable()
 export class ColumndropdownsService {
-  create(createColumndropdownDto: CreateColumndropdownDto) {
-    return 'This action adds a new columndropdown';
+
+  constructor(@Inject(COLUMNDROPDOWN_REPOSITORY) private readonly columndropdownRepository: typeof Columndropdown) { }
+
+  async create(createColumndropdownDto: CreateColumndropdownDto): Promise<Columndropdown> {
+    return await this.columndropdownRepository.create<Columndropdown>(createColumndropdownDto);
   }
 
-  findAll() {
-    return `This action returns all columndropdowns`;
+  async findAll(): Promise<Columndropdown[]> {
+    return await this.columndropdownRepository.findAll<Columndropdown>();
   }
+
 
   findOne(id: number) {
     return `This action returns a #${id} columndropdown`;

@@ -1,15 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { CHART_REPOSITORY } from 'src/core/constants';
 import { CreateChartDto } from './dto/create-chart.dto';
 import { UpdateChartDto } from './dto/update-chart.dto';
+import { Chart } from './entities/chart.entity';
 
 @Injectable()
 export class ChartsService {
-  create(createChartDto: CreateChartDto) {
-    return 'This action adds a new chart';
+
+  constructor(@Inject(CHART_REPOSITORY) private readonly chartRepository: typeof Chart) { }
+
+  async create(createChartDto: CreateChartDto): Promise<Chart> {
+    return await this.chartRepository.create<Chart>(createChartDto);
   }
 
-  findAll() {
-    return `This action returns all charts`;
+  async findAll(): Promise<Chart[]> {
+    return await this.chartRepository.findAll<Chart>();
   }
 
   findOne(id: number) {

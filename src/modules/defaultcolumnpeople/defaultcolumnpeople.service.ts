@@ -1,15 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { DEFAULTCOLUMNPEOPLE_REPOSITORY } from 'src/core/constants';
 import { CreateDefaultcolumnpersonDto } from './dto/create-defaultcolumnperson.dto';
 import { UpdateDefaultcolumnpersonDto } from './dto/update-defaultcolumnperson.dto';
+import { Defaultcolumnperson } from './entities/defaultcolumnperson.entity';
 
 @Injectable()
 export class DefaultcolumnpeopleService {
-  create(createDefaultcolumnpersonDto: CreateDefaultcolumnpersonDto) {
-    return 'This action adds a new defaultcolumnperson';
+
+  constructor(@Inject(DEFAULTCOLUMNPEOPLE_REPOSITORY) private readonly defaultcolumnpersonRepository: typeof Defaultcolumnperson) { }
+
+  async create(createDefaultcolumnpersonDto: CreateDefaultcolumnpersonDto): Promise<Defaultcolumnperson> {
+    return await this.defaultcolumnpersonRepository.create<Defaultcolumnperson>(createDefaultcolumnpersonDto);
   }
 
-  findAll() {
-    return `This action returns all defaultcolumnpeople`;
+  async findAll(): Promise<Defaultcolumnperson[]> {
+    return await this.defaultcolumnpersonRepository.findAll<Defaultcolumnperson>();
   }
 
   findOne(id: number) {

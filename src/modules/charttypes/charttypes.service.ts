@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { CHARTTYPE_REPOSITORY } from 'src/core/constants';
 import { CreateCharttypeDto } from './dto/create-charttype.dto';
 import { UpdateCharttypeDto } from './dto/update-charttype.dto';
+import { ChartType } from './entities/charttype.entity';
 
 @Injectable()
 export class CharttypesService {
-  create(createCharttypeDto: CreateCharttypeDto) {
-    return 'This action adds a new charttype';
+
+  constructor(@Inject(CHARTTYPE_REPOSITORY) private readonly charttypeRepository: typeof ChartType) { }
+
+  async create(createCharttypeDto: CreateCharttypeDto): Promise<ChartType> {
+    return await this.charttypeRepository.create<ChartType>(createCharttypeDto);
   }
 
-  findAll() {
-    return `This action returns all charttypes`;
+  async findAll(): Promise<ChartType[]> {
+    return await this.charttypeRepository.findAll<ChartType>();
   }
+
 
   findOne(id: number) {
     return `This action returns a #${id} charttype`;

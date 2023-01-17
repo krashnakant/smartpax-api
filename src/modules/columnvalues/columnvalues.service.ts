@@ -1,15 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { COLUMNVALUE_REPOSITORY } from 'src/core/constants';
 import { CreateColumnvalueDto } from './dto/create-columnvalue.dto';
 import { UpdateColumnvalueDto } from './dto/update-columnvalue.dto';
+import { Columnvalue } from './entities/columnvalue.entity';
 
 @Injectable()
 export class ColumnvaluesService {
-  create(createColumnvalueDto: CreateColumnvalueDto) {
-    return 'This action adds a new columnvalue';
+
+  constructor(@Inject(COLUMNVALUE_REPOSITORY) private readonly columnvalueRepository: typeof Columnvalue) { }
+
+  async create(createColumnvalueDto: CreateColumnvalueDto): Promise<Columnvalue> {
+    return await this.columnvalueRepository.create<Columnvalue>(createColumnvalueDto);
   }
 
-  findAll() {
-    return `This action returns all columnvalues`;
+  async findAll(): Promise<Columnvalue[]> {
+    return await this.columnvalueRepository.findAll<Columnvalue>();
   }
 
   findOne(id: number) {

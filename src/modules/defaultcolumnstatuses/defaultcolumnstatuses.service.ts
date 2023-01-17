@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { DEFAULTCOLUMNSTATUS_REPOSITORY } from 'src/core/constants';
 import { CreateDefaultcolumnstatusDto } from './dto/create-defaultcolumnstatus.dto';
 import { UpdateDefaultcolumnstatusDto } from './dto/update-defaultcolumnstatus.dto';
+import { Defaultcolumnstatus } from './entities/defaultcolumnstatus.entity';
 
 @Injectable()
 export class DefaultcolumnstatusesService {
-  create(createDefaultcolumnstatusDto: CreateDefaultcolumnstatusDto) {
-    return 'This action adds a new defaultcolumnstatus';
+
+  constructor(@Inject(DEFAULTCOLUMNSTATUS_REPOSITORY) private readonly defaultcolumnstatusRepository: typeof Defaultcolumnstatus) { }
+
+  async create(createDefaultcolumnstatusDto: CreateDefaultcolumnstatusDto): Promise<Defaultcolumnstatus> {
+    return await this.defaultcolumnstatusRepository.create<Defaultcolumnstatus>(createDefaultcolumnstatusDto);
   }
 
-  findAll() {
-    return `This action returns all defaultcolumnstatuses`;
+  async findAll(): Promise<Defaultcolumnstatus[]> {
+    return await this.defaultcolumnstatusRepository.findAll<Defaultcolumnstatus>();
   }
+
 
   findOne(id: number) {
     return `This action returns a #${id} defaultcolumnstatus`;
