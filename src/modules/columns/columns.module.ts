@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { ColumnsService } from './columns.service';
 import { ColumnsController } from './columns.controller';
 import { columnsProviders } from './columns.provider';
-import { columnsDropdownProviders } from '../columndropdowns/columnsdropdowns.provider';
-import { columnsStatusProviders } from '../columnstatuses/columnstatuses.provider';
-import { columnpeoplesProviders } from '../columnpeoples/columnpeoples.provider';
+import { dropdownsProviders } from '../dropdowns/dropdowns.provider';
+import { usersProviders } from '../users/users.providers';
+import { statusesProviders } from '../statuses/statuses.provider';
 
 
 @Module({
   controllers: [ColumnsController],
-  providers: [ColumnsService,...columnsProviders,...columnsDropdownProviders,...columnsStatusProviders,... columnpeoplesProviders]
+  providers: [ColumnsService,...columnsProviders,...dropdownsProviders,...usersProviders, ...statusesProviders]
 })
 export class ColumnsModule {}

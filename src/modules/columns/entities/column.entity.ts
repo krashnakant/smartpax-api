@@ -91,10 +91,10 @@ export class GColumn extends Model<GColumn> {
         type: DataType.INTEGER,
         allowNull: true
     })
-    item_id?: number;
+    item_id: number;
 
     @BelongsTo(() => Item)
-    item?:Item
+    item:Item
     //--------------------
 
 

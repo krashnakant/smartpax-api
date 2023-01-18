@@ -21,6 +21,13 @@ export class ColumnsController {
     res.status(200).send(responseJSON);
   }
 
+  @Get('findallbyitemid/:item_id')
+  async findAllByItemId(@Param('item_id') item_id: number,@Res() res: Response) {
+    let columns = await this.columnsService.findAllByItemId(item_id);
+    let responseJSON = {"data": { "columns": columns, status: 200 }};
+    res.status(200).send(responseJSON);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
     let column = await this.columnsService.findOne(+id);
