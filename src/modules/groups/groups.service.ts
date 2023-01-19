@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { GROUP_REPOSITORY } from 'src/core/constants';
+import { COLUMN_REPOSITORY, GROUP_REPOSITORY } from 'src/core/constants';
+import { GColumn } from '../columns/entities/column.entity';
 import { CreateGroupDto } from './dto/create-group.dto';
 import { UpdateGroupDto } from './dto/update-group.dto';
 import { Group } from './entities/group.entity';
@@ -7,9 +8,13 @@ import { Group } from './entities/group.entity';
 @Injectable()
 export class GroupsService {
 
-  constructor(@Inject(GROUP_REPOSITORY) private readonly groupRepository: typeof Group) { }
+  constructor(
+    @Inject(GROUP_REPOSITORY) private readonly groupRepository: typeof Group,
+    @Inject(COLUMN_REPOSITORY) private readonly columnRepository: typeof GColumn
+  ) { }
 
-  async create(createGroupDto: CreateGroupDto): Promise<Group> {
+  async create(createGroupDto: CreateGroupDto): Promise<Group> {    
+    console.log(createGroupDto);
     return await this.groupRepository.create<Group>(createGroupDto);
   }
 
