@@ -19,7 +19,7 @@ export class GroupsService {
   }
 
   async findAllGroups(item_id: number): Promise<Group[]> {
-    let groups = await this.groupRepository.findAll<Group>({where: {item_id}}) 
+    let groups = await this.groupRepository.findAll<Group>({where: {item_id}, order:[['id','DESC']]}) 
     return groups;
   }
 
@@ -31,11 +31,11 @@ export class GroupsService {
     return `This action returns a #${id} group`;
   }
 
-  update(id: number, updateGroupDto: UpdateGroupDto) {
-    return `This action updates a #${id} group`;
+  async update(id: number, updateGroupDto: UpdateGroupDto) {
+    return await this.groupRepository.update<Group>(updateGroupDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} group`;
+  async remove(id: number) {
+    return await this.groupRepository.destroy({where: {id}})
   }
 }
