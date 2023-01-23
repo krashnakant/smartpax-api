@@ -1,6 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { COLUMN_REPOSITORY, ITEM_REPOSITORY } from 'src/core/constants';
+import { COLUMN_REPOSITORY, DEFAULTCOLUMN_REPOSITORY, ITEM_REPOSITORY } from 'src/core/constants';
+import { CreateColumnDto } from '../columns/dto/create-column.dto';
 import { GColumn } from '../columns/entities/column.entity';
+import { Defaultcolumn } from '../defaultcolumns/entities/defaultcolumn.entity';
 import { CreateItemDto } from './dto/create-item.dto';
 import { ItemDto } from './dto/item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
@@ -9,10 +11,37 @@ import { Item } from './entities/item.entity';
 @Injectable()
 export class ItemsService {
 
-  constructor(@Inject(ITEM_REPOSITORY) private readonly itemRepository: typeof Item, @Inject(COLUMN_REPOSITORY) private readonly columnRepository: typeof GColumn) { }
+  constructor(
+    @Inject(ITEM_REPOSITORY) private readonly itemRepository: typeof Item, 
+    @Inject(COLUMN_REPOSITORY) private readonly columnRepository: typeof GColumn,
+    @Inject(DEFAULTCOLUMN_REPOSITORY) private readonly defaultColumnRepository: typeof Defaultcolumn
+
+  ) { }
 
   async create(createItemDto: CreateItemDto): Promise<Item> {
-    return await this.itemRepository.create<Item>(createItemDto);
+
+    let item = await this.itemRepository.create<Item>(createItemDto);
+    if (createItemDto.item_type == "dataset") {
+      let allDefaultColumns = await this.defaultColumnRepository.findAll<Defaultcolumn>();
+      //console.log(allDefaultColumns)
+      allDefaultColumns.map(async (dcolumn, index) => {
+        let datavalue = dcolumn.dataValues;
+        console.log(dcolumn.dataValues)
+        let newColumn:CreateColumnDto = {
+          column_name:datavalue.column_name,
+          datatype:datavalue.datatype,
+          item_id:item.id,
+          hidden:false,
+          order:index,
+          formula:"sum",
+          unit_position:"l",
+          unit:"$"
+        }
+        await this.columnRepository.create<GColumn>(newColumn)
+      })
+    }
+    
+    return item;
   }
 
   async findAll(): Promise<Item[]> {

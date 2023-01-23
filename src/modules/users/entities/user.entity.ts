@@ -45,9 +45,9 @@ export class User extends Model<User> {
     @HasMany(() => GColumn)
     columns: GColumn[]
 
-    //----------------------many to many
-    @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnperson)
-    dropdowns: Defaultcolumnperson[];
-    //--------------------
+    @HasMany(() => Defaultcolumn)
+    defaultcolumns: Defaultcolumn[]
+
+    
 
 }

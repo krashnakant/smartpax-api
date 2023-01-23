@@ -10,8 +10,8 @@ export class ColumnsController {
   constructor(private readonly columnsService: ColumnsService) {}
 
   @Post()
-  create(@Body() createColumnDto: CreateColumnDto) {
-    return this.columnsService.create(createColumnDto);
+  create(@Body() createColumnDto: any) {
+    return this.columnsService.create(createColumnDto.data);
   }
 
   @Get()

@@ -18,8 +18,6 @@ export class Dropdown extends Model<Dropdown> {
     @HasMany(() => GColumn)
     columns: GColumn[]
 
-    //----------------------many to many
-    @BelongsToMany(() => Defaultcolumn, () => Defaultcolumndropdown)
-    dropdowns: Defaultcolumndropdown[];
-    //--------------------
+    @HasMany(() => Defaultcolumn)
+    dropdowns: Defaultcolumn[]
 }

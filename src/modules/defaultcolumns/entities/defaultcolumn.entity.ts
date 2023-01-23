@@ -25,12 +25,24 @@ export class Defaultcolumn extends Model<Defaultcolumn> {
     @ForeignKey(() => Dropdown)
     @Column({
         type: DataType.INTEGER,
-        allowNull: false
+        allowNull: true
     })
     dropdown_id?: number;
 
     @BelongsTo(() => Dropdown)
     dropdown?:Dropdown
+    //--------------------
+
+    //--------------------one to one
+    @ForeignKey(() => User)
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true
+    })
+    admin_id?: number;
+
+    @BelongsTo(() => User)
+    admin?:User
     //--------------------
 
     // //----------------------many to many

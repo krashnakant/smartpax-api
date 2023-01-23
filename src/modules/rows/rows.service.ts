@@ -17,6 +17,10 @@ export class RowsService {
     return await this.rowRepository.findOne<Row>({ where: { id } });
   }
 
+  async findAllByGroupId(group_id: number): Promise<Row[]> {
+    return await this.rowRepository.findAll<Row>({where: { group_id }});
+  }
+
   async findAll(): Promise<Row[]> {
     return await this.rowRepository.findAll<Row>();
   }

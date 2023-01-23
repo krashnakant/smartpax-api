@@ -10,8 +10,15 @@ export class ColumnvaluesController {
   constructor(private readonly columnvaluesService: ColumnvaluesService) {}
 
   @Post()
-  create(@Body() createColumnvalueDto: CreateColumnvalueDto) {
-    return this.columnvaluesService.create(createColumnvalueDto);
+  create(@Body() createColumnvalueDto: any) {
+    return this.columnvaluesService.create(createColumnvalueDto.data);
+  }
+
+  @Get('findallbygroupid/:group_id')
+  async findAllByGroupId(@Param('group_id') group_id: number,@Res() res: Response) {
+    let rows = await this.columnvaluesService.findAllByGroupId(group_id);
+    let responseJSON = {"data": { "rows": rows, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get()
@@ -29,8 +36,8 @@ export class ColumnvaluesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateColumnvalueDto: UpdateColumnvalueDto) {
-    return this.columnvaluesService.update(+id, updateColumnvalueDto);
+  update(@Param('id') id: string, @Body() updateColumnvalueDto: any) {
+    return this.columnvaluesService.update(+id, updateColumnvalueDto.data);
   }
 
   @Delete(':id')

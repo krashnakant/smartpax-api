@@ -3,6 +3,7 @@ import { Columndropdown } from 'src/modules/columndropdowns/entities/columndropd
 import { Columnperson } from 'src/modules/columnpeoples/entities/columnperson.entity';
 import { GColumn } from 'src/modules/columns/entities/column.entity';
 import { Columnstatus } from 'src/modules/columnstatuses/entities/columnstatus.entity';
+import { Columnvalue } from 'src/modules/columnvalues/entities/columnvalue.entity';
 import { Defaultcolumndropdown } from 'src/modules/defaultcolumndropdowns/entities/defaultcolumndropdown.entity';
 import { Defaultcolumnperson } from 'src/modules/defaultcolumnpeople/entities/defaultcolumnperson.entity';
 import { Defaultcolumn } from 'src/modules/defaultcolumns/entities/defaultcolumn.entity';
@@ -54,6 +55,7 @@ export const databaseProviders = [
         Columnstatus,
         Group,
         Row,
+        Columnvalue
       ]);
       await sequelize.sync();
       return sequelize;

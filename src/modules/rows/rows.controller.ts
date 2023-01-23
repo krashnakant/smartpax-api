@@ -10,8 +10,15 @@ export class RowsController {
   constructor(private readonly rowsService: RowsService) {}
 
   @Post()
-  create(@Body() createRowDto: CreateRowDto) {
-    return this.rowsService.create(createRowDto);
+  create(@Body() createRowDto: any) {
+    return this.rowsService.create(createRowDto.data);
+  }
+
+  @Get('findallbygroupid/:group_id')
+  async findAllByGroupId(@Param('group_id') group_id: number,@Res() res: Response) {
+    let rows = await this.rowsService.findAllByGroupId(group_id);
+    let responseJSON = {"data": { "rows": rows, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get()

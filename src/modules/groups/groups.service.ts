@@ -10,7 +10,7 @@ export class GroupsService {
 
   constructor(
     @Inject(GROUP_REPOSITORY) private readonly groupRepository: typeof Group,
-    @Inject(COLUMN_REPOSITORY) private readonly columnRepository: typeof GColumn
+    @Inject(COLUMN_REPOSITORY) private readonly columnRepository: typeof GColumn,
   ) { }
 
   async create(createGroupDto: CreateGroupDto): Promise<Group> {    
