@@ -27,17 +27,17 @@ export class DropdownvaluesService {
 
   async findAllByDropdownId(dropdown_id: number): Promise<Dropdownvalue[]> {
     return await this.dropdownvalueRepository.findAll<Dropdownvalue>({ where: { dropdown_id }, include:[this.dropdownRepository] });
-  }  
+  }
+  
+  async update(id: number, updateDropdownvalueDto: UpdateDropdownvalueDto) {
+    return await this.dropdownvalueRepository.update<Dropdownvalue>(updateDropdownvalueDto, {where: {id}});
+  }
+
+  async remove(id: number) {
+    return await this.dropdownvalueRepository.destroy({where: {id}})
+  }
 
   findOne(id: number) {
     return `This action returns a #${id} dropdownvalue`;
-  }
-
-  update(id: number, updateDropdownvalueDto: UpdateDropdownvalueDto) {
-    return `This action updates a #${id} dropdownvalue`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} dropdownvalue`;
   }
 }

@@ -10,8 +10,8 @@ export class DropdownsController {
   constructor(private readonly dropdownsService: DropdownsService) {}
 
   @Post()
-  create(@Body() createDropdownDto: CreateDropdownDto) {
-    return this.dropdownsService.create(createDropdownDto);
+  create(@Body() createDropdownDto: any) {
+    return this.dropdownsService.create(createDropdownDto.data);
   }
 
   @Get()

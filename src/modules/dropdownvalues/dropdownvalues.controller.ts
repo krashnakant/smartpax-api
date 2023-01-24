@@ -10,8 +10,8 @@ export class DropdownvaluesController {
   constructor(private readonly dropdownvaluesService: DropdownvaluesService) {}
 
   @Post()
-  create(@Body() createDropdownvalueDto: CreateDropdownvalueDto) {
-    return this.dropdownvaluesService.create(createDropdownvalueDto);
+  create(@Body() createDropdownvalueDto: any) {
+    return this.dropdownvaluesService.create(createDropdownvalueDto.data);
   }
 
   @Get()
@@ -30,8 +30,8 @@ export class DropdownvaluesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDropdownvalueDto: UpdateDropdownvalueDto) {
-    return this.dropdownvaluesService.update(+id, updateDropdownvalueDto);
+  update(@Param('id') id: string, @Body() updateDropdownvalueDto: any) {
+    return this.dropdownvaluesService.update(+id, updateDropdownvalueDto.data);
   }
 
   @Delete(':id')
@@ -40,7 +40,9 @@ export class DropdownvaluesController {
   }
 
   @Get("findallbydropdownid/:dropdown_id")
-  findAllByDropdownId(@Param('dropdown_id') dropdown_id: number){
-    return this.dropdownvaluesService.findAllByDropdownId(dropdown_id);
+  async findAllByDropdownId(@Param('dropdown_id') dropdown_id: number, @Res() res: Response){
+    let dropdownvalues = await this.dropdownvaluesService.findAllByDropdownId(dropdown_id);
+    let responseJSON = {"data": { "dropdownvalues": dropdownvalues, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 }
