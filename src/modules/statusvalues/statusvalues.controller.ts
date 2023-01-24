@@ -10,8 +10,8 @@ export class StatusvaluesController {
   constructor(private readonly statusvaluesService: StatusvaluesService) {}
 
   @Post()
-  create(@Body() createStatusvalueDto: CreateStatusvalueDto) {
-    return this.statusvaluesService.create(createStatusvalueDto);
+  create(@Body() createStatusvalueDto: any) {
+    return this.statusvaluesService.create(createStatusvalueDto.data);
   }
 
   @Get()
@@ -22,8 +22,10 @@ export class StatusvaluesController {
   }
 
   @Get("findallbystatusid/:status_id")
-  findAllByStatusId(@Param('status_id') status_id: number){
-    return this.statusvaluesService.findAllByStatusId(status_id);
+  async findAllByStatusId(@Param('status_id') status_id: number, @Res() res: Response){
+    let statusvalues = await this.statusvaluesService.findAllByStatusId(status_id);
+    let responseJSON = {"data": { "statusvalues": statusvalues, status: 200 }};
+    res.status(200).send(responseJSON);
   }
 
   @Get(':id')
@@ -34,8 +36,8 @@ export class StatusvaluesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStatusvalueDto: UpdateStatusvalueDto) {
-    return this.statusvaluesService.update(+id, updateStatusvalueDto);
+  update(@Param('id') id: string, @Body() updateStatusvalueDto: any) {
+    return this.statusvaluesService.update(+id, updateStatusvalueDto.data);
   }
 
   @Delete(':id')

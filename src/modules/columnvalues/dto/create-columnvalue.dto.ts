@@ -3,4 +3,5 @@ export class CreateColumnvalueDto {
     readonly group_id: number;
     readonly row_id: number;
     readonly value: string;
+    readonly color_code?:string;
 }

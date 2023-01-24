@@ -30,18 +30,19 @@ export class ColumnsService {
   }
 
   async findAllByItemId(item_id: number): Promise<GColumn[]> {
-    return await this.columnRepository.findAll<GColumn>({where: { item_id },include:[this.dropdownRepository, this.peopleRepository, this.statusRepository]});
+    return await this.columnRepository.findAll<GColumn>({where: { item_id },include:[this.dropdownRepository, this.peopleRepository, this.statusRepository],order :[['order','ASC']]});
   }
 
   findOne(id: number) {
     return `This action returns a #${id} column`;
   }
 
-  update(id: number, updateColumnDto: UpdateColumnDto) {
-    return `This action updates a #${id} column`;
+  async update(id: number, updateColumnDto: UpdateColumnDto) {
+    return await this.columnRepository.update<GColumn>(updateColumnDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} column`;
+  async remove(id: number) {
+    return await this.columnRepository.destroy({where: {id}})
   }
+  
 }

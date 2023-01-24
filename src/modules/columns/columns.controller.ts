@@ -36,8 +36,8 @@ export class ColumnsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateColumnDto: UpdateColumnDto) {
-    return this.columnsService.update(+id, updateColumnDto);
+  update(@Param('id') id: string, @Body() updateColumnDto: any) {
+    return this.columnsService.update(+id, updateColumnDto.data);
   }
 
   @Delete(':id')

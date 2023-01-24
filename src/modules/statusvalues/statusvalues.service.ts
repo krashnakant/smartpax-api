@@ -23,17 +23,17 @@ export class StatusvaluesService {
 
   async findAllByStatusId(status_id: number): Promise<Statusvalue[]> {
     return await this.statusvalueRepository.findAll<Statusvalue>({ where: { status_id } });
-  }
+  }  
 
   findOne(id: number) {
     return `This action returns a #${id} statusvalue`;
   }
 
-  update(id: number, updateStatusvalueDto: UpdateStatusvalueDto) {
-    return `This action updates a #${id} statusvalue`;
+  async update(id: number, updateStatusvalueDto: UpdateStatusvalueDto) {
+    return await this.statusvalueRepository.update<Statusvalue>(updateStatusvalueDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} statusvalue`;
+  async remove(id: number) {
+    return await this.statusvalueRepository.destroy({where: {id}})
   }
 }

@@ -40,5 +40,11 @@ export class Columnvalue extends Model<Columnvalue> {
     })
     value: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    color_code?: string;
+
     
 }

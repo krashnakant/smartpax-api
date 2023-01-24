@@ -10,8 +10,8 @@ export class StatusesController {
   constructor(private readonly statusesService: StatusesService) {}
 
   @Post()
-  create(@Body() createStatusDto: CreateStatusDto) {
-    return this.statusesService.create(createStatusDto);
+  create(@Body() createStatusDto: any) {
+    return this.statusesService.create(createStatusDto.data);
   }
 
   @Get()
@@ -29,8 +29,8 @@ export class StatusesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateStatusDto: UpdateStatusDto) {
-    return this.statusesService.update(+id, updateStatusDto);
+  update(@Param('id') id: string, @Body() updateStatusDto: any) {
+    return this.statusesService.update(+id, updateStatusDto.data);
   }
 
   @Delete(':id')

@@ -25,6 +25,8 @@ export class StatusesService {
     return await this.statusRepository.findAll<Status>({include:[this.statusvalueRepository]});
   }
 
+  
+
 
 
   findOne(id: number) {
