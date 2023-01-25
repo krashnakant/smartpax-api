@@ -21,11 +21,11 @@ export class ChartsService {
     return `This action returns a #${id} chart`;
   }
 
-  update(id: number, updateChartDto: UpdateChartDto) {
-    return `This action updates a #${id} chart`;
+  async update(id: number, updateChartDto: UpdateChartDto) {
+    return await this.chartRepository.update<Chart>(updateChartDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chart`;
-  }
+  async remove(id: number) {
+    return await this.chartRepository.destroy({where: {id}})
+  }  
 }

@@ -4,4 +4,5 @@ export class CreateColumnvalueDto {
     readonly row_id: number;
     readonly value: string;
     readonly color_code?:string;
+    readonly delete_status?:boolean;
 }

@@ -23,4 +23,11 @@ export class Invitation extends Model<Invitation> {
         allowNull: false,
     })
     permission_type: string;
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

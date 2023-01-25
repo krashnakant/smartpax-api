@@ -21,12 +21,12 @@ export class ChartcategorysService {
   findOne(id: number) {
     return `This action returns a #${id} chartcategory`;
   }
-
-  update(id: number, updateChartcategoryDto: UpdateChartcategoryDto) {
-    return `This action updates a #${id} chartcategory`;
+  
+  async update(id: number, updateChartcategoryDto: UpdateChartcategoryDto) {
+    return await this.chartcategoryRepository.update<Chartcategory>(updateChartcategoryDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chartcategory`;
-  }
+  async remove(id: number) {
+    return await this.chartcategoryRepository.destroy({where: {id}})
+  }  
 }

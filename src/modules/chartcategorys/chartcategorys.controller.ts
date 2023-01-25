@@ -29,8 +29,8 @@ export class ChartcategorysController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChartcategoryDto: UpdateChartcategoryDto) {
-    return this.chartcategorysService.update(+id, updateChartcategoryDto);
+  update(@Param('id') id: string, @Body() updateChartcategoryDto: any) {
+    return this.chartcategorysService.update(+id, updateChartcategoryDto.data);
   }
 
   @Delete(':id')

@@ -1,4 +1,4 @@
-import { BelongsTo, Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, ForeignKey, Model, DataType, Table } from "sequelize-typescript";
 import { Defaultcolumn } from "src/modules/defaultcolumns/entities/defaultcolumn.entity";
 import { User } from "src/modules/users/entities/user.entity";
 
@@ -21,6 +21,13 @@ export class Defaultcolumnperson extends Model<Defaultcolumnperson> {
     @BelongsTo(() => User)
     user:User
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }
 
 

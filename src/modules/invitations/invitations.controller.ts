@@ -23,8 +23,8 @@ export class InvitationsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvitationDto: UpdateInvitationDto) {
-    return this.invitationsService.update(+id, updateInvitationDto);
+  update(@Param('id') id: string, @Body() updateInvitationDto: any) {
+    return this.invitationsService.update(+id, updateInvitationDto.data);
   }
 
   @Delete(':id')

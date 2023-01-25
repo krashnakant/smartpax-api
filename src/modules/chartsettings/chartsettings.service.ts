@@ -22,11 +22,11 @@ export class ChartsettingsService {
     return `This action returns a #${id} chartsetting`;
   }
 
-  update(id: number, updateChartsettingDto: UpdateChartsettingDto) {
-    return `This action updates a #${id} chartsetting`;
+  async update(id: number, updateChartsettingDto: UpdateChartsettingDto) {
+    return await this.chartsettingRepository.update<Chartsetting>(updateChartsettingDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chartsetting`;
-  }
+  async remove(id: number) {
+    return await this.chartsettingRepository.destroy({where: {id}})
+  }  
 }

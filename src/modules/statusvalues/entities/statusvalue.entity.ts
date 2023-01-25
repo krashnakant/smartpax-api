@@ -23,4 +23,11 @@ export class Statusvalue extends Model<Statusvalue> {
     @BelongsTo(() => Status)
     status:Status
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

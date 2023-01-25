@@ -41,6 +41,11 @@ export class Item extends Model<Item> {
     @HasMany(() => GColumn)
     columns: GColumn[]
 
-    
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 
 }

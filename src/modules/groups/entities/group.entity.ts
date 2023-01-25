@@ -34,6 +34,12 @@ export class Group extends Model<Group> {
     @HasMany(() => Row)
     rows: Row[]
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 
 
     // @HasMany(() => CValue)

@@ -25,19 +25,15 @@ export class StatusesService {
     return await this.statusRepository.findAll<Status>({include:[this.statusvalueRepository]});
   }
 
-  
-
-
-
   findOne(id: number) {
     return `This action returns a #${id} status`;
   }
-
-  update(id: number, updateStatusDto: UpdateStatusDto) {
-    return `This action updates a #${id} status`;
+  
+  async update(id: number, updateStatusDto: UpdateStatusDto) {
+    return await this.statusRepository.update<Status>(updateStatusDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} status`;
+  async remove(id: number) {
+    return await this.statusRepository.destroy({where: {id}})
   }
 }

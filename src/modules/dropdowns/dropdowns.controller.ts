@@ -29,8 +29,8 @@ export class DropdownsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDropdownDto: UpdateDropdownDto) {
-    return this.dropdownsService.update(+id, updateDropdownDto);
+  update(@Param('id') id: string, @Body() updateDropdownDto: any) {
+    return this.dropdownsService.update(+id, updateDropdownDto.data);
   }
 
   @Delete(':id')

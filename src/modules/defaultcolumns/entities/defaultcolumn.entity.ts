@@ -1,9 +1,5 @@
-import { Table, Column, Model, DataType, HasMany, ForeignKey, BelongsTo, BelongsToMany } from 'sequelize-typescript';
-import { Defaultcolumndropdown } from 'src/modules/defaultcolumndropdowns/entities/defaultcolumndropdown.entity';
-import { Defaultcolumnperson } from 'src/modules/defaultcolumnpeople/entities/defaultcolumnperson.entity';
-import { Defaultcolumnstatus } from 'src/modules/defaultcolumnstatuses/entities/defaultcolumnstatus.entity';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Dropdown } from 'src/modules/dropdowns/entities/dropdown.entity';
-import { Status } from 'src/modules/statuses/entities/status.entity';
 import { User } from 'src/modules/users/entities/user.entity';
 
 @Table
@@ -44,6 +40,13 @@ export class Defaultcolumn extends Model<Defaultcolumn> {
     @BelongsTo(() => User)
     admin?:User
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 
     // //----------------------many to many
     // @BelongsToMany(() => Dropdown, () => Defaultcolumndropdown)

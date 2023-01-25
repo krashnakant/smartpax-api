@@ -48,6 +48,10 @@ export class User extends Model<User> {
     @HasMany(() => Defaultcolumn)
     defaultcolumns: Defaultcolumn[]
 
-    
-
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

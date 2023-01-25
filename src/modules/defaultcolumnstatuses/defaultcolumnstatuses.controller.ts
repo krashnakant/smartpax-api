@@ -29,8 +29,8 @@ export class DefaultcolumnstatusesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDefaultcolumnstatusDto: UpdateDefaultcolumnstatusDto) {
-    return this.defaultcolumnstatusesService.update(+id, updateDefaultcolumnstatusDto);
+  update(@Param('id') id: string, @Body() updateDefaultcolumnstatusDto: any) {
+    return this.defaultcolumnstatusesService.update(+id, updateDefaultcolumnstatusDto.data);
   }
 
   @Delete(':id')

@@ -21,11 +21,11 @@ export class FiltersService {
     return `This action returns a #${id} filter`;
   }
 
-  update(id: number, updateFilterDto: UpdateFilterDto) {
-    return `This action updates a #${id} filter`;
+  async update(id: number, updateFilterDto: UpdateFilterDto) {
+    return await this.filterRepository.update<Filter>(updateFilterDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} filter`;
+  async remove(id: number) {
+    return await this.filterRepository.destroy({where: {id}})
   }
 }

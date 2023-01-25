@@ -5,5 +5,6 @@ export class CreateGroupDto {
     readonly rows:any[];
     readonly isOpen:boolean;
     readonly color:string;
+    readonly delete_status?:boolean;
 }
 

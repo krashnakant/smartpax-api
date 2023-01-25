@@ -30,4 +30,11 @@ export class Sort extends Model<Sort> {
     @BelongsTo(() => Item)
     item:Item
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

@@ -33,11 +33,11 @@ export class DefaultcolumnsService {
     return `This action returns a #${id} defaultcolumn`;
   }
 
-  update(id: number, updateDefaultcolumnDto: UpdateDefaultcolumnDto) {
-    return `This action updates a #${id} defaultcolumn`;
+  async update(id: number, updateDefaultcolumnDto: UpdateDefaultcolumnDto) {
+    return await this.defaultColumnRepository.update<Defaultcolumn>(updateDefaultcolumnDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} defaultcolumn`;
+  async remove(id: number) {
+    return await this.defaultColumnRepository.destroy({where: {id}})
   }
 }

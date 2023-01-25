@@ -29,8 +29,8 @@ export class FiltersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFilterDto: UpdateFilterDto) {
-    return this.filtersService.update(+id, updateFilterDto);
+  update(@Param('id') id: string, @Body() updateFilterDto: any) {
+    return this.filtersService.update(+id, updateFilterDto.data);
   }
 
   @Delete(':id')

@@ -17,16 +17,15 @@ export class ColumnstatusesService {
     return await this.columnstatusRepository.findAll<Columnstatus>();
   }
 
-
   findOne(id: number) {
     return `This action returns a #${id} columnstatus`;
   }
 
-  update(id: number, updateColumnstatusDto: UpdateColumnstatusDto) {
-    return `This action updates a #${id} columnstatus`;
+  async update(id: number, updateColumnstatusDto: UpdateColumnstatusDto) {
+    return await this.columnstatusRepository.update<Columnstatus>(updateColumnstatusDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} columnstatus`;
-  }
+  async remove(id: number) {
+    return await this.columnstatusRepository.destroy({where: {id}})
+  }  
 }

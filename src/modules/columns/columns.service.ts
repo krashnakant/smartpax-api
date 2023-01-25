@@ -36,13 +36,12 @@ export class ColumnsService {
   findOne(id: number) {
     return `This action returns a #${id} column`;
   }
-
+  
   async update(id: number, updateColumnDto: UpdateColumnDto) {
     return await this.columnRepository.update<GColumn>(updateColumnDto, {where: {id}});
   }
 
   async remove(id: number) {
     return await this.columnRepository.destroy({where: {id}})
-  }
-  
+  }  
 }

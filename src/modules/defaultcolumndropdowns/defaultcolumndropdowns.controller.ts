@@ -29,8 +29,8 @@ export class DefaultcolumndropdownsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDefaultcolumndropdownDto: UpdateDefaultcolumndropdownDto) {
-    return this.defaultcolumndropdownsService.update(+id, updateDefaultcolumndropdownDto);
+  update(@Param('id') id: string, @Body() updateDefaultcolumndropdownDto: any) {
+    return this.defaultcolumndropdownsService.update(+id, updateDefaultcolumndropdownDto.data);
   }
 
   @Delete(':id')

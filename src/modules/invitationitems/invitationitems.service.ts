@@ -21,11 +21,11 @@ export class InvitationitemsService {
     return `This action returns a #${id} invitationitem`;
   }
 
-  update(id: number, updateInvitationitemDto: UpdateInvitationitemDto) {
-    return `This action updates a #${id} invitationitem`;
+  async update(id: number, updateInvitationitemDto: UpdateInvitationitemDto) {
+    return await this.invitationitemRepository.update<Invitationitem>(updateInvitationitemDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} invitationitem`;
+  async remove(id: number) {
+    return await this.invitationitemRepository.destroy({where: {id}})
   }
 }

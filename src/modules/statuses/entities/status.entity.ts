@@ -22,4 +22,11 @@ export class Status extends Model<Status> {
     @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnstatus)
     statuses: Defaultcolumnstatus[];
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

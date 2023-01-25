@@ -22,11 +22,11 @@ export class ColumndropdownsService {
     return `This action returns a #${id} columndropdown`;
   }
 
-  update(id: number, updateColumndropdownDto: UpdateColumndropdownDto) {
-    return `This action updates a #${id} columndropdown`;
+  async update(id: number, updateColumndropdownDto: UpdateColumndropdownDto) {
+    return await this.columndropdownRepository.update<Columndropdown>(updateColumndropdownDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} columndropdown`;
-  }
+  async remove(id: number) {
+    return await this.columndropdownRepository.destroy({where: {id}})
+  }  
 }

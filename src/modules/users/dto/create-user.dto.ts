@@ -4,4 +4,5 @@ export class CreateUserDto {
     readonly lastname: string;
     readonly email: string;
     readonly user_type: string;
+    readonly delete_status?:boolean;
 }

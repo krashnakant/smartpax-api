@@ -1,1 +1,3 @@
-export class CreateColumndropdownDto {}
+export class CreateColumndropdownDto {
+    readonly delete_status?:boolean;
+}

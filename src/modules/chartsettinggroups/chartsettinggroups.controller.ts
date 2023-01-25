@@ -29,8 +29,8 @@ export class ChartsettinggroupsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChartsettinggroupDto: UpdateChartsettinggroupDto) {
-    return this.chartsettinggroupsService.update(+id, updateChartsettinggroupDto);
+  update(@Param('id') id: string, @Body() updateChartsettinggroupDto: any) {
+    return this.chartsettinggroupsService.update(+id, updateChartsettinggroupDto.data);
   }
 
   @Delete(':id')

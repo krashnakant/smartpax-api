@@ -29,8 +29,8 @@ export class SortController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSortDto: UpdateSortDto) {
-    return this.sortService.update(+id, updateSortDto);
+  update(@Param('id') id: string, @Body() updateSortDto: any) {
+    return this.sortService.update(+id, updateSortDto.data);
   }
 
   @Delete(':id')
