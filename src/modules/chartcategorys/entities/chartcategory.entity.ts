@@ -9,4 +9,11 @@ export class Chartcategory extends Model<Chartcategory> {
     })
     category_name: string;
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
+
 }

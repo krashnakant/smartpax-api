@@ -22,11 +22,11 @@ export class PermissionsService {
     return `This action returns a #${id} permission`;
   }
 
-  update(id: number, updatePermissionDto: UpdatePermissionDto) {
-    return `This action updates a #${id} permission`;
+  async update(id: number, updatePermissionDto: UpdatePermissionDto) {
+    return await this.permissionRepository.update<Permission>(updatePermissionDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} permission`;
-  }
+  async remove(id: number) {
+    return await this.permissionRepository.destroy({where: {id}})
+  } 
 }

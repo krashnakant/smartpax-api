@@ -29,8 +29,8 @@ export class BenchmarksController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBenchmarkDto: UpdateBenchmarkDto) {
-    return this.benchmarksService.update(+id, updateBenchmarkDto);
+  update(@Param('id') id: string, @Body() updateBenchmarkDto: any) {
+    return this.benchmarksService.update(+id, updateBenchmarkDto.data);
   }
 
   @Delete(':id')

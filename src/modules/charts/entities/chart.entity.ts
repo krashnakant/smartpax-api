@@ -32,4 +32,11 @@ export class Chart extends Model<Chart> {
     item:Item
     //--------------------
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
+
 }

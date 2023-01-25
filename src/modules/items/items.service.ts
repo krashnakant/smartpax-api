@@ -74,13 +74,11 @@ export class ItemsService {
     return await this.itemRepository.findOne<Item>({ where: { id }, include:[this.columnRepository] });
   }
 
-  update(id: number, updateItemDto: UpdateItemDto) {
-    return `This action updates a #${id} item`;
+  async update(id: number, updateItemDto: UpdateItemDto) {
+    return await this.itemRepository.update<Item>(updateItemDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} item`;
-  }
-
-  
+  async remove(id: number) {
+    return await this.itemRepository.destroy({where: {id}})
+  }  
 }

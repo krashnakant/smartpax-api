@@ -3,4 +3,5 @@ export class CreateBenchmarkDto {
     readonly chart_setting_id: number;
     readonly label: string;
     readonly color_code: string;
+    readonly delete_status?:boolean
 }

@@ -22,11 +22,13 @@ export class BenchmarksService {
     return `This action returns a #${id} benchmark`;
   }
 
-  update(id: number, updateBenchmarkDto: UpdateBenchmarkDto) {
-    return `This action updates a #${id} benchmark`;
+  async update(id: number, updateBenchmarkDto: UpdateBenchmarkDto) {
+    return await this.benchmarkRepository.update<Benchmark>(updateBenchmarkDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} benchmark`;
-  }
+  async remove(id: number) {
+    return await this.benchmarkRepository.destroy({where: {id}})
+  }  
+
+  
 }
