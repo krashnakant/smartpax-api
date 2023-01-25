@@ -14,7 +14,7 @@ export class FiltersService {
   }
 
   async findAll(): Promise<Filter[]> {
-    return await this.filterRepository.findAll<Filter>();
+    return await this.filterRepository.findAll<Filter>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -26,6 +26,10 @@ export class FiltersService {
   }
 
   async remove(id: number) {
-    return await this.filterRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.filterRepository.update<Filter>(data, {where: {id}});
+    // return await this.filterRepository.destroy({where: {id}})
   }
 }

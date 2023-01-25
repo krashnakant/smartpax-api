@@ -14,7 +14,7 @@ export class CharttypesService {
   }
 
   async findAll(): Promise<ChartType[]> {
-    return await this.charttypeRepository.findAll<ChartType>();
+    return await this.charttypeRepository.findAll<ChartType>({where: {delete_status:false}});
   }
 
 
@@ -27,6 +27,10 @@ export class CharttypesService {
   }
 
   async remove(id: number) {
-    return await this.charttypeRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.charttypeRepository.update<ChartType>(data, {where: {id}});
+    // return await this.charttypeRepository.destroy({where: {id}})
   }  
 }

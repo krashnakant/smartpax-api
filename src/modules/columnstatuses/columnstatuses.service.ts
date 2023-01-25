@@ -14,7 +14,7 @@ export class ColumnstatusesService {
   }
 
   async findAll(): Promise<Columnstatus[]> {
-    return await this.columnstatusRepository.findAll<Columnstatus>();
+    return await this.columnstatusRepository.findAll<Columnstatus>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -26,6 +26,10 @@ export class ColumnstatusesService {
   }
 
   async remove(id: number) {
-    return await this.columnstatusRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.columnstatusRepository.update<Columnstatus>(data, {where: {id}});
+    // return await this.columnstatusRepository.destroy({where: {id}})
   }  
 }

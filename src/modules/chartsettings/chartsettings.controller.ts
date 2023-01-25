@@ -10,8 +10,8 @@ export class ChartsettingsController {
   constructor(private readonly chartsettingsService: ChartsettingsService) {}
 
   @Post()
-  create(@Body() createChartsettingDto: CreateChartsettingDto) {
-    return this.chartsettingsService.create(createChartsettingDto);
+  create(@Body() createChartsettingDto: any) {
+    return this.chartsettingsService.create(createChartsettingDto.data);
   }
 
   @Get()

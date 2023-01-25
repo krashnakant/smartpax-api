@@ -14,15 +14,15 @@ export class RowsService {
   }
 
   async findOneById(id: number): Promise<Row> {
-    return await this.rowRepository.findOne<Row>({ where: { id } });
+    return await this.rowRepository.findOne<Row>({ where: { id, delete_status:false } });
   }
 
   async findAllByGroupId(group_id: number): Promise<Row[]> {
-    return await this.rowRepository.findAll<Row>({where: { group_id }});
+    return await this.rowRepository.findAll<Row>({where: { group_id, delete_status:false }});
   }
 
   async findAll(): Promise<Row[]> {
-    return await this.rowRepository.findAll<Row>();
+    return await this.rowRepository.findAll<Row>({ where: { delete_status:false } });
   }
 
   findOne(id: number) {
@@ -34,6 +34,10 @@ export class RowsService {
   }
 
   async remove(id: number) {
-    return await this.rowRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.rowRepository.update<Row>(data, {where: {id}});
+    // return await this.rowRepository.destroy({where: {id}})
   }
 }

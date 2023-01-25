@@ -14,7 +14,7 @@ export class PermissionsService {
   }
 
   async findAll(): Promise<Permission[]> {
-    return await this.permissionRepository.findAll<Permission>();
+    return await this.permissionRepository.findAll<Permission>({ where: { delete_status:false } });
   }
   
 
@@ -27,6 +27,10 @@ export class PermissionsService {
   }
 
   async remove(id: number) {
-    return await this.permissionRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.permissionRepository.update<Permission>(data, {where: {id}});
+    // return await this.permissionRepository.destroy({where: {id}})
   } 
 }

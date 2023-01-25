@@ -10,8 +10,8 @@ export class InvitationitemsController {
   constructor(private readonly invitationitemsService: InvitationitemsService) {}
 
   @Post()
-  create(@Body() createInvitationitemDto: CreateInvitationitemDto) {
-    return this.invitationitemsService.create(createInvitationitemDto);
+  create(@Body() createInvitationitemDto: any) {
+    return this.invitationitemsService.create(createInvitationitemDto.data);
   }
 
   @Get()

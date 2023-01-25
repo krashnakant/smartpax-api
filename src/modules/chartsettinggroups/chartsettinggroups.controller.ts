@@ -10,8 +10,8 @@ export class ChartsettinggroupsController {
   constructor(private readonly chartsettinggroupsService: ChartsettinggroupsService) {}
 
   @Post()
-  create(@Body() createChartsettinggroupDto: CreateChartsettinggroupDto) {
-    return this.chartsettinggroupsService.create(createChartsettinggroupDto);
+  create(@Body() createChartsettinggroupDto: any) {
+    return this.chartsettinggroupsService.create(createChartsettinggroupDto.data);
   }
 
   @Get()

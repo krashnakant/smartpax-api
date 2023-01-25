@@ -14,7 +14,7 @@ export class ColumndropdownsService {
   }
 
   async findAll(): Promise<Columndropdown[]> {
-    return await this.columndropdownRepository.findAll<Columndropdown>();
+    return await this.columndropdownRepository.findAll<Columndropdown>({where: {delete_status:false}});
   }
 
 
@@ -27,6 +27,10 @@ export class ColumndropdownsService {
   }
 
   async remove(id: number) {
-    return await this.columndropdownRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.columndropdownRepository.update<Columndropdown>(data, {where: {id}});
+    // return await this.columndropdownRepository.destroy({where: {id}})
   }  
 }

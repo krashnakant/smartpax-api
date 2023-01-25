@@ -18,15 +18,15 @@ export class DropdownvaluesService {
   }
 
   async findOneById(id: number): Promise<Dropdownvalue> {
-    return await this.dropdownvalueRepository.findOne<Dropdownvalue>({ where: { id }, include:[this.dropdownRepository] });
+    return await this.dropdownvalueRepository.findOne<Dropdownvalue>({ where: { id, delete_status:false }, include:[this.dropdownRepository] });
   }
 
   async findAll(): Promise<Dropdownvalue[]> {
-    return await this.dropdownvalueRepository.findAll<Dropdownvalue>({include:[this.dropdownRepository]});
+    return await this.dropdownvalueRepository.findAll<Dropdownvalue>({where: { delete_status:false },include:[this.dropdownRepository]});
   }
 
   async findAllByDropdownId(dropdown_id: number): Promise<Dropdownvalue[]> {
-    return await this.dropdownvalueRepository.findAll<Dropdownvalue>({ where: { dropdown_id }, include:[this.dropdownRepository] });
+    return await this.dropdownvalueRepository.findAll<Dropdownvalue>({ where: { dropdown_id, delete_status:false }, include:[this.dropdownRepository] });
   }
   
   async update(id: number, updateDropdownvalueDto: UpdateDropdownvalueDto) {
@@ -34,7 +34,11 @@ export class DropdownvaluesService {
   }
 
   async remove(id: number) {
-    return await this.dropdownvalueRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.dropdownvalueRepository.update<Dropdownvalue>(data, {where: {id}});
+    // return await this.dropdownvalueRepository.destroy({where: {id}})
   }
 
   findOne(id: number) {

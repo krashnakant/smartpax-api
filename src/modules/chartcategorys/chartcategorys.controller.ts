@@ -10,8 +10,8 @@ export class ChartcategorysController {
   constructor(private readonly chartcategorysService: ChartcategorysService) {}
 
   @Post()
-  create(@Body() createChartcategoryDto: CreateChartcategoryDto) {
-    return this.chartcategorysService.create(createChartcategoryDto);
+  create(@Body() createChartcategoryDto: any) {
+    return this.chartcategorysService.create(createChartcategoryDto.data);
   }
 
   @Get()

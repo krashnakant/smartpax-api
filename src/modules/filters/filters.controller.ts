@@ -10,8 +10,8 @@ export class FiltersController {
   constructor(private readonly filtersService: FiltersService) {}
 
   @Post()
-  create(@Body() createFilterDto: CreateFilterDto) {
-    return this.filtersService.create(createFilterDto);
+  create(@Body() createFilterDto: any) {
+    return this.filtersService.create(createFilterDto.data);
   }
 
   @Get()

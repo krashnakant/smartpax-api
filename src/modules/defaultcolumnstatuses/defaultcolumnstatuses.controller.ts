@@ -10,8 +10,8 @@ export class DefaultcolumnstatusesController {
   constructor(private readonly defaultcolumnstatusesService: DefaultcolumnstatusesService) {}
 
   @Post()
-  create(@Body() createDefaultcolumnstatusDto: CreateDefaultcolumnstatusDto) {
-    return this.defaultcolumnstatusesService.create(createDefaultcolumnstatusDto);
+  create(@Body() createDefaultcolumnstatusDto: any) {
+    return this.defaultcolumnstatusesService.create(createDefaultcolumnstatusDto.data);
   }
 
   @Get()

@@ -14,7 +14,7 @@ export class DefaultcolumnstatusesService {
   }
 
   async findAll(): Promise<Defaultcolumnstatus[]> {
-    return await this.defaultcolumnstatusRepository.findAll<Defaultcolumnstatus>();
+    return await this.defaultcolumnstatusRepository.findAll<Defaultcolumnstatus>({where: {delete_status:false}});
   }
 
 
@@ -27,6 +27,10 @@ export class DefaultcolumnstatusesService {
   }
 
   async remove(id: number) {
-    return await this.defaultcolumnstatusRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.defaultcolumnstatusRepository.update<Defaultcolumnstatus>(data, {where: {id}});
+    // return await this.defaultcolumnstatusRepository.destroy({where: {id}})
   }
 }

@@ -10,8 +10,8 @@ export class CharttypesController {
   constructor(private readonly charttypesService: CharttypesService) {}
 
   @Post()
-  create(@Body() createCharttypeDto: CreateCharttypeDto) {
-    return this.charttypesService.create(createCharttypeDto);
+  create(@Body() createCharttypeDto: any) {
+    return this.charttypesService.create(createCharttypeDto.data);
   }
 
   @Get()

@@ -10,8 +10,8 @@ export class ColumndropdownsController {
   constructor(private readonly columndropdownsService: ColumndropdownsService) {}
 
   @Post()
-  create(@Body() createColumndropdownDto: CreateColumndropdownDto) {
-    return this.columndropdownsService.create(createColumndropdownDto);
+  create(@Body() createColumndropdownDto: any) {
+    return this.columndropdownsService.create(createColumndropdownDto.data);
   }
 
   @Get()
