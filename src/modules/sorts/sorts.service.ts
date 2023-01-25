@@ -22,11 +22,11 @@ export class SortService {
     return `This action returns a #${id} sort`;
   }
 
-  update(id: number, updateSortDto: UpdateSortDto) {
-    return `This action updates a #${id} sort`;
+  async update(id: number, updateSortDto: UpdateSortDto) {
+    return await this.sortRepository.update<Sort>(updateSortDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} sort`;
+  async remove(id: number) {
+    return await this.sortRepository.destroy({where: {id}})
   }
 }

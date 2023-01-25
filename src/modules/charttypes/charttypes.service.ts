@@ -22,11 +22,11 @@ export class CharttypesService {
     return `This action returns a #${id} charttype`;
   }
 
-  update(id: number, updateCharttypeDto: UpdateCharttypeDto) {
-    return `This action updates a #${id} charttype`;
+  async update(id: number, updateCharttypeDto: UpdateCharttypeDto) {
+    return await this.charttypeRepository.update<ChartType>(updateCharttypeDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} charttype`;
-  }
+  async remove(id: number) {
+    return await this.charttypeRepository.destroy({where: {id}})
+  }  
 }

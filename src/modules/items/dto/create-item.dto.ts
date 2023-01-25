@@ -3,4 +3,5 @@ export class CreateItemDto {
     readonly user_id: number;
     readonly parent_id: number;
     readonly item_type: string;
+    readonly delete_status?:boolean;
 }

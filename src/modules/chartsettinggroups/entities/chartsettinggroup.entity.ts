@@ -32,4 +32,11 @@ export class Chartsettinggroup extends Model<Chartsettinggroup> {
     group:Group
     //--------------------
 
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

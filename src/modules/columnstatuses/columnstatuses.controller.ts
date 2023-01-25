@@ -29,8 +29,8 @@ export class ColumnstatusesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateColumnstatusDto: UpdateColumnstatusDto) {
-    return this.columnstatusesService.update(+id, updateColumnstatusDto);
+  update(@Param('id') id: string, @Body() updateColumnstatusDto: any) {
+    return this.columnstatusesService.update(+id, updateColumnstatusDto.data);
   }
 
   @Delete(':id')

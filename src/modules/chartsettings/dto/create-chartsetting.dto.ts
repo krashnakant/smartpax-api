@@ -11,4 +11,5 @@ export class CreateChartsettingDto {
     readonly sort_by: boolean;
     readonly is_empty: boolean;
     readonly group_type: string;
+    readonly delete_status?:boolean;
 }

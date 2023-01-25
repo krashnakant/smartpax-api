@@ -22,5 +22,12 @@ export class Columnperson extends Model<Columnperson> {
     @BelongsTo(() => User)
     user:User;
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
    
 }

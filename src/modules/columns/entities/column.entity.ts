@@ -97,6 +97,13 @@ export class GColumn extends Model<GColumn> {
     item:Item
     //--------------------
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
+
 
 }
 

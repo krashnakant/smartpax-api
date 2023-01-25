@@ -20,4 +20,11 @@ export class ChartType extends Model<ChartType> {
     @BelongsTo(() => Chartcategory)
     category:Chartcategory;
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

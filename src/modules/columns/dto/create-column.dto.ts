@@ -7,4 +7,5 @@ export class CreateColumnDto {
     readonly formula?:string;
     readonly unit_position?:string;
     readonly unit?:string;
+    readonly delete_status?:boolean;
 }

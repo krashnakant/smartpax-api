@@ -1,4 +1,4 @@
-import { BelongsTo, Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, ForeignKey, Model, Table, DataType } from "sequelize-typescript";
 import { Defaultcolumn } from "src/modules/defaultcolumns/entities/defaultcolumn.entity";
 import { Status } from "src/modules/statuses/entities/status.entity";
 
@@ -21,5 +21,12 @@ export class Defaultcolumnstatus extends Model<Defaultcolumnstatus> {
     @BelongsTo(() => Status)
     status:Status
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }
 

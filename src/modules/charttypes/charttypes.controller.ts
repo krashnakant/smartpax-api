@@ -29,8 +29,8 @@ export class CharttypesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCharttypeDto: UpdateCharttypeDto) {
-    return this.charttypesService.update(+id, updateCharttypeDto);
+  update(@Param('id') id: string, @Body() updateCharttypeDto: any) {
+    return this.charttypesService.update(+id, updateCharttypeDto.data);
   }
 
   @Delete(':id')

@@ -31,4 +31,11 @@ export class Permission extends Model<Permission> {
     })
     permission_type: string;
 
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
+
 }

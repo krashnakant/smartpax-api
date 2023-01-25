@@ -21,11 +21,11 @@ export class DefaultcolumnpeopleService {
     return `This action returns a #${id} defaultcolumnperson`;
   }
 
-  update(id: number, updateDefaultcolumnpersonDto: UpdateDefaultcolumnpersonDto) {
-    return `This action updates a #${id} defaultcolumnperson`;
+  async update(id: number, updateDefaultcolumnpersonDto: UpdateDefaultcolumnpersonDto) {
+    return await this.defaultcolumnpersonRepository.update<Defaultcolumnperson>(updateDefaultcolumnpersonDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} defaultcolumnperson`;
-  }
+  async remove(id: number) {
+    return await this.defaultcolumnpersonRepository.destroy({where: {id}})
+  }  
 }

@@ -29,11 +29,11 @@ export class RowsService {
     return `This action returns a #${id} row`;
   }
 
-  update(id: number, updateRowDto: UpdateRowDto) {
-    return `This action updates a #${id} row`;
+  async update(id: number, updateRowDto: UpdateRowDto) {
+    return await this.rowRepository.update<Row>(updateRowDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} row`;
+  async remove(id: number) {
+    return await this.rowRepository.destroy({where: {id}})
   }
 }

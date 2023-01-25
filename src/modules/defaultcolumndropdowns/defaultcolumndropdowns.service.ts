@@ -21,11 +21,11 @@ export class DefaultcolumndropdownsService {
     return `This action returns a #${id} defaultcolumndropdown`;
   }
 
-  update(id: number, updateDefaultcolumndropdownDto: UpdateDefaultcolumndropdownDto) {
-    return `This action updates a #${id} defaultcolumndropdown`;
+  async update(id: number, updateDefaultcolumndropdownDto: UpdateDefaultcolumndropdownDto) {
+    return await this.defaultcolumndropdownRepository.update<Defaultcolumndropdown>(updateDefaultcolumndropdownDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} defaultcolumndropdown`;
-  }
+  async remove(id: number) {
+    return await this.defaultcolumndropdownRepository.destroy({where: {id}})
+  }  
 }

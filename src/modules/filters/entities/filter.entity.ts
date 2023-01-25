@@ -36,4 +36,11 @@ export class Filter extends Model<Filter> {
         allowNull: false,
     })
     value: string;
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

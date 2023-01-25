@@ -22,11 +22,11 @@ export class DefaultcolumnstatusesService {
     return `This action returns a #${id} defaultcolumnstatus`;
   }
 
-  update(id: number, updateDefaultcolumnstatusDto: UpdateDefaultcolumnstatusDto) {
-    return `This action updates a #${id} defaultcolumnstatus`;
+  async update(id: number, updateDefaultcolumnstatusDto: UpdateDefaultcolumnstatusDto) {
+    return await this.defaultcolumnstatusRepository.update<Defaultcolumnstatus>(updateDefaultcolumnstatusDto, {where: {id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} defaultcolumnstatus`;
+  async remove(id: number) {
+    return await this.defaultcolumnstatusRepository.destroy({where: {id}})
   }
 }

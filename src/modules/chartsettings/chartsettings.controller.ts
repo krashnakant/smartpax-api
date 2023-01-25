@@ -29,8 +29,8 @@ export class ChartsettingsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChartsettingDto: UpdateChartsettingDto) {
-    return this.chartsettingsService.update(+id, updateChartsettingDto);
+  update(@Param('id') id: string, @Body() updateChartsettingDto: any) {
+    return this.chartsettingsService.update(+id, updateChartsettingDto.data);
   }
 
   @Delete(':id')

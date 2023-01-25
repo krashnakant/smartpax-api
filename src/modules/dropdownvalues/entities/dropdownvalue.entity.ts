@@ -18,4 +18,11 @@ export class Dropdownvalue extends Model<Dropdownvalue> {
     @BelongsTo(() => Dropdown)
     dropdown:Dropdown
     //--------------------
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue:false
+    })
+    delete_status: boolean;
 }

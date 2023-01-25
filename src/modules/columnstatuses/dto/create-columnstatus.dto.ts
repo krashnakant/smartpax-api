@@ -1,1 +1,3 @@
-export class CreateColumnstatusDto {}
+export class CreateColumnstatusDto {
+    readonly delete_status?:boolean;
+}

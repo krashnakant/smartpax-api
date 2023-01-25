@@ -29,8 +29,8 @@ export class ColumnpeoplesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateColumnpeopleDto: UpdateColumnpeopleDto) {
-    return this.columnpeoplesService.update(+id, updateColumnpeopleDto);
+  update(@Param('id') id: string, @Body() updateColumnpeopleDto: any) {
+    return this.columnpeoplesService.update(+id, updateColumnpeopleDto.data);
   }
 
   @Delete(':id')

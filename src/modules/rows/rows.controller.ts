@@ -36,8 +36,8 @@ export class RowsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRowDto: UpdateRowDto) {
-    return this.rowsService.update(+id, updateRowDto);
+  update(@Param('id') id: string, @Body() updateRowDto: any) {
+    return this.rowsService.update(+id, updateRowDto.data);
   }
 
   @Delete(':id')
