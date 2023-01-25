@@ -14,7 +14,7 @@ export class BenchmarksService {
   }
 
   async findAll(): Promise<Benchmark[]> {
-    return await this.benchmarkRepository.findAll<Benchmark>();
+    return await this.benchmarkRepository.findAll<Benchmark>({ where: { delete_status:true } });
   }
 
 
@@ -27,7 +27,11 @@ export class BenchmarksService {
   }
 
   async remove(id: number) {
-    return await this.benchmarkRepository.destroy({where: {id}})
+    let data = {
+      delete_status:false
+    }
+    return await this.benchmarkRepository.update<Benchmark>(data, {where: {id}});
+    //return await this.benchmarkRepository.destroy({where: {id}})
   }  
 
   

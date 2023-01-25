@@ -11,6 +11,12 @@ export class Item extends Model<Item> {
     })
     name: string;
 
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    description: string;
+
     //--------------------many to one
     @ForeignKey(() => User)
     @Column

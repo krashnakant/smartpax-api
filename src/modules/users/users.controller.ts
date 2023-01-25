@@ -10,8 +10,8 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  create(@Body() createUserDto: any) {
+    return this.usersService.create(createUserDto.data);
   }
 
   @Get()
@@ -24,6 +24,13 @@ export class UsersController {
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response) {
     let user = await this.usersService.findOne(+id);
+    let responseJSON = {"data": { "user": user, status: 200 }};
+    res.status(200).send(responseJSON);
+  }
+
+  @Get('getuserbyuserid/:user_id')
+  async getUserByUserId(@Param('user_id') user_id: string, @Res() res: Response) {
+    let user = await this.usersService.findOneByUserId(user_id);
     let responseJSON = {"data": { "user": user, status: 200 }};
     res.status(200).send(responseJSON);
   }

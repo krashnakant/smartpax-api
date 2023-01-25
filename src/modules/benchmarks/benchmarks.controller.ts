@@ -10,8 +10,8 @@ export class BenchmarksController {
   constructor(private readonly benchmarksService: BenchmarksService) {}
 
   @Post()
-  create(@Body() createBenchmarkDto: CreateBenchmarkDto) {
-    return this.benchmarksService.create(createBenchmarkDto);
+  create(@Body() createBenchmarkDto: any) {
+    return this.benchmarksService.create(createBenchmarkDto.data);
   }
 
   @Get()

@@ -14,15 +14,15 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.findAll<User>();
+    return await this.userRepository.findAll<User>({ where: { delete_status:true } });
   }
 
   async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { id } });
+    return await this.userRepository.findOne<User>({ where: { id,delete_status:true  } });
   }
 
   async findOneByUserId(user_id: string): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { user_id } });
+    return await this.userRepository.findOne<User>({ where: { user_id, delete_status:true } });
   }
 
   findOne(id: number) {
@@ -34,6 +34,10 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    return await this.userRepository.destroy({where: {id}})
+    let data = {
+      delete_status:false
+    }
+    return await this.userRepository.update<User>(data, {where: {id}});
+    //return await this.userRepository.destroy({where: {id}})
   }
 }
