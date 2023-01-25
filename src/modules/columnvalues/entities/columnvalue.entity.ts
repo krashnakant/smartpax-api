@@ -36,7 +36,7 @@ export class Columnvalue extends Model<Columnvalue> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     value: string;
 
