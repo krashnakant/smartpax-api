@@ -29,6 +29,12 @@ export class GColumn extends Model<GColumn> {
         type: DataType.STRING,
         allowNull: true,
     })
+    formula_value?: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
     unit_position?: string;
 
     @Column({

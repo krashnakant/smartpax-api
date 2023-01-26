@@ -8,4 +8,5 @@ export class CreateColumnDto {
     readonly unit_position?:string;
     readonly unit?:string;
     readonly delete_status?:boolean;
+    readonly formula_value?:string;
 }
