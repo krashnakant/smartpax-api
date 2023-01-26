@@ -7,19 +7,19 @@ export class Defaultcolumnstatus extends Model<Defaultcolumnstatus> {
     //--------------------many to one
     @ForeignKey(() => Defaultcolumn)
     @Column
-    default_column_id: number;
+    default_column_id?: number;
 
     @BelongsTo(() => Defaultcolumn)
-    default_column:Defaultcolumn
+    default_column?:Defaultcolumn
     //--------------------
 
     //--------------------many to one
     @ForeignKey(() => Status)
     @Column
-    status_id: number;
+    status_id?: number;
 
     @BelongsTo(() => Status)
-    status:Status
+    status?:Status
     //--------------------
 
     @Column({
@@ -27,6 +27,6 @@ export class Defaultcolumnstatus extends Model<Defaultcolumnstatus> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
 

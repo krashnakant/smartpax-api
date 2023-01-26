@@ -12,18 +12,18 @@ export class Dropdown extends Model<Dropdown> {
     name: string;
 
     @HasMany(() => Dropdownvalue)
-    dropdownvalues: Dropdownvalue[]
+    dropdownvalues?: Dropdownvalue[]
 
     @HasMany(() => GColumn)
-    columns: GColumn[]
+    columns?: GColumn[]
 
     @HasMany(() => Defaultcolumn)
-    dropdowns: Defaultcolumn[]
+    dropdowns?: Defaultcolumn[]
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

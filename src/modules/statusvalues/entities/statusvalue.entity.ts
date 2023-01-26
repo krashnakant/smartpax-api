@@ -18,10 +18,10 @@ export class Statusvalue extends Model<Statusvalue> {
     //--------------------one to one
     @ForeignKey(() => Status)
     @Column
-    status_id: number;
+    status_id?: number;
 
     @BelongsTo(() => Status)
-    status:Status
+    status?:Status
     //--------------------
 
     @Column({
@@ -29,5 +29,5 @@ export class Statusvalue extends Model<Statusvalue> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

@@ -12,10 +12,10 @@ export class Row extends Model<Row> {
     //--------------------one to one
     @ForeignKey(() => Group)
     @Column
-    group_id: number;
+    group_id?: number;
 
     @BelongsTo(() => Group)
-    group:Group
+    group?:Group
     //--------------------
 
     @Column({
@@ -23,5 +23,5 @@ export class Row extends Model<Row> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

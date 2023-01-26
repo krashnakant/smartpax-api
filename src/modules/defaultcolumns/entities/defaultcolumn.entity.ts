@@ -46,7 +46,7 @@ export class Defaultcolumn extends Model<Defaultcolumn> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
     // //----------------------many to many
     // @BelongsToMany(() => Dropdown, () => Defaultcolumndropdown)

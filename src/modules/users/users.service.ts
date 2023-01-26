@@ -10,19 +10,20 @@ export class UsersService {
   constructor(@Inject(USER_REPOSITORY) private readonly userRepository: typeof User) { }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    console.log(createUserDto);
     return await this.userRepository.create<User>(createUserDto);
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.findAll<User>({ where: { delete_status:true } });
+    return await this.userRepository.findAll<User>({ where: { delete_status:false } });
   }
 
   async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { id,delete_status:true  } });
+    return await this.userRepository.findOne<User>({ where: { id,delete_status:false  } });
   }
 
   async findOneByUserId(user_id: string): Promise<User> {
-    return await this.userRepository.findOne<User>({ where: { user_id, delete_status:true } });
+    return await this.userRepository.findOne<User>({ where: { user_id, delete_status:false } });
   }
 
   findOne(id: number) {
@@ -35,7 +36,7 @@ export class UsersService {
 
   async remove(id: number) {
     let data = {
-      delete_status:false
+      delete_status:true
     }
     return await this.userRepository.update<User>(data, {where: {id}});
     //return await this.userRepository.destroy({where: {id}})

@@ -7,22 +7,22 @@ import { Item } from "src/modules/items/entities/item.entity";
 export class Invitationitem extends Model<Invitationitem> {
     @ForeignKey(() => Item)
     @Column
-    item_id: number;
+    item_id?: number;
 
     @BelongsTo(() => Item)
-    item:Item
+    item?:Item
 
     @ForeignKey(() => Invitation)
     @Column
-    invitation_id: number;
+    invitation_id?: number;
 
     @BelongsTo(() => Invitation)
-    invitation:Invitation
+    invitation?:Invitation
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

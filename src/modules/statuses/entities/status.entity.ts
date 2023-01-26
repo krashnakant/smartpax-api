@@ -13,14 +13,14 @@ export class Status extends Model<Status> {
     name: string;
 
     @HasMany(() => Statusvalue)
-    statusvalues: Statusvalue[]
+    statusvalues?: Statusvalue[]
 
     @HasMany(() => GColumn)
-    columns: GColumn[]
+    columns?: GColumn[]
 
     //----------------------many to many
     @BelongsToMany(() => Defaultcolumn, () => Defaultcolumnstatus)
-    statuses: Defaultcolumnstatus[];
+    statuses?: Defaultcolumnstatus[];
     //--------------------
 
     @Column({
@@ -28,5 +28,5 @@ export class Status extends Model<Status> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

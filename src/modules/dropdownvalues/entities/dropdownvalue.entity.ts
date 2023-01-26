@@ -13,10 +13,10 @@ export class Dropdownvalue extends Model<Dropdownvalue> {
     //--------------------one to one
     @ForeignKey(() => Dropdown)
     @Column
-    dropdown_id: number;
+    dropdown_id?: number;
 
     @BelongsTo(() => Dropdown)
-    dropdown:Dropdown
+    dropdown?:Dropdown
     //--------------------
 
     @Column({
@@ -24,5 +24,5 @@ export class Dropdownvalue extends Model<Dropdownvalue> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

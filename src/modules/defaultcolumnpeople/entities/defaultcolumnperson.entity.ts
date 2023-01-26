@@ -7,19 +7,19 @@ export class Defaultcolumnperson extends Model<Defaultcolumnperson> {
     //--------------------many to one
     @ForeignKey(() => Defaultcolumn)
     @Column
-    default_column_id: number;
+    default_column_id?: number;
 
     @BelongsTo(() => Defaultcolumn)
-    default_column:Defaultcolumn
+    default_column?:Defaultcolumn
     //--------------------
 
     //--------------------many to one
     @ForeignKey(() => User)
     @Column
-    user_id: number;
+    user_id?: number;
 
     @BelongsTo(() => User)
-    user:User
+    user?:User
     //--------------------
 
     @Column({
@@ -27,7 +27,7 @@ export class Defaultcolumnperson extends Model<Defaultcolumnperson> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
 
 

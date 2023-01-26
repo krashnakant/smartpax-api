@@ -8,19 +8,19 @@ export class Columnperson extends Model<Columnperson> {
     //--------------------many to one
     @ForeignKey(() => GColumn)
     @Column
-    column_id: number;
+    column_id?: number;
 
     @BelongsTo(() => GColumn)
-    column:GColumn
+    column?:GColumn
     //--------------------
 
     //--------------------many to one
     @ForeignKey(() => User)
     @Column
-    user_id: number;
+    user_id?: number;
 
     @BelongsTo(() => User)
-    user:User;
+    user?:User;
     //--------------------
 
     @Column({
@@ -28,6 +28,6 @@ export class Columnperson extends Model<Columnperson> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
    
 }

@@ -22,10 +22,10 @@ export class Chartsetting extends Model<Chartsetting> {
     //--------------------many to one
     @ForeignKey(() => Chart)
     @Column
-    chart_id: number;
+    chart_id?: number;
 
     @BelongsTo(() => Chart)
-    chart:Chart
+    chart?:Chart
     //--------------------
 
     @Column({
@@ -97,6 +97,6 @@ export class Chartsetting extends Model<Chartsetting> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
 }

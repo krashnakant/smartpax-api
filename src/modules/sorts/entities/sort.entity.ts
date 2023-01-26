@@ -16,19 +16,19 @@ export class Sort extends Model<Sort> {
     //--------------------many to one
     @ForeignKey(() => GColumn)
     @Column
-    column_id: number;
+    column_id?: number;
 
     @BelongsTo(() => GColumn)
-    column:GColumn
+    column?:GColumn
     //--------------------
 
     //--------------------many to one
     @ForeignKey(() => Item)
     @Column
-    item_id: number;
+    item_id?: number;
 
     @BelongsTo(() => Item)
-    item:Item
+    item?:Item
     //--------------------
 
     @Column({
@@ -36,5 +36,5 @@ export class Sort extends Model<Sort> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

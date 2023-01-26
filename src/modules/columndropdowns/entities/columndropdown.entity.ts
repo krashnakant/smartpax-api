@@ -7,7 +7,7 @@ export class Columndropdown extends Model<Columndropdown> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
 
 

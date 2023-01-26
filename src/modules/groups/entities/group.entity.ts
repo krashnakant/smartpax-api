@@ -13,10 +13,10 @@ export class Group extends Model<Group> {
     //--------------------one to one
     @ForeignKey(() => Item)
     @Column
-    item_id: number;
+    item_id?: number;
 
     @BelongsTo(() => Item)
-    item:Item
+    item?:Item
     //--------------------
 
     @Column({
@@ -32,14 +32,14 @@ export class Group extends Model<Group> {
     isOpen: boolean;
 
     @HasMany(() => Row)
-    rows: Row[]
+    rows?: Row[]
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
 
     // @HasMany(() => CValue)

@@ -10,10 +10,10 @@ export class Defaultcolumndropdown extends Model<Defaultcolumndropdown> {
     @Column({
         allowNull: true
     })
-    default_column_id: number;
+    default_column_id?: number;
 
     @BelongsTo(() => Defaultcolumn)
-    default_column:Defaultcolumn
+    default_column?:Defaultcolumn
     //--------------------
 
     //--------------------many to one
@@ -21,10 +21,10 @@ export class Defaultcolumndropdown extends Model<Defaultcolumndropdown> {
     @Column({
         allowNull: true
     })
-    dropdown_id: number;
+    dropdown_id?: number;
 
     @BelongsTo(() => Dropdown)
-    dropdown:Dropdown
+    dropdown?:Dropdown
     //--------------------
 
     @Column({
@@ -32,7 +32,7 @@ export class Defaultcolumndropdown extends Model<Defaultcolumndropdown> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
 
 

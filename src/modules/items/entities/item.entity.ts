@@ -20,10 +20,10 @@ export class Item extends Model<Item> {
     //--------------------many to one
     @ForeignKey(() => User)
     @Column
-    user_id: number;
+    user_id?: number;
 
     @BelongsTo(() => User)
-    user:User
+    user?:User
     //--------------------
 
     @Column({
@@ -40,18 +40,18 @@ export class Item extends Model<Item> {
     item_type: string;
 
     @HasMany(() => Group)
-    groups: Group[]
+    groups?: Group[]
 
     children:Item[];
 
     @HasMany(() => GColumn)
-    columns: GColumn[]
+    columns?: GColumn[]
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
 }

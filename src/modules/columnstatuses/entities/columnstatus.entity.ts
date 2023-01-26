@@ -7,7 +7,7 @@ export class Columnstatus extends Model<Columnstatus> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
 
 

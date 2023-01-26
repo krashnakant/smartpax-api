@@ -15,10 +15,10 @@ export class ChartType extends Model<ChartType> {
     //--------------------many to one
     @ForeignKey(() => Chartcategory)
     @Column
-    category_id: number;
+    category_id?: number;
 
     @BelongsTo(() => Chartcategory)
-    category:Chartcategory;
+    category?:Chartcategory;
     //--------------------
 
     @Column({
@@ -26,5 +26,5 @@ export class ChartType extends Model<ChartType> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

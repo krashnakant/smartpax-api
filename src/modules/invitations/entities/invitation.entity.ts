@@ -5,10 +5,10 @@ import { User } from 'src/modules/users/entities/user.entity';
 export class Invitation extends Model<Invitation> {
     @ForeignKey(() => User)
     @Column
-    sender_id: number;
+    sender_id?: number;
 
     @BelongsTo(() => User)
-    sender:User
+    sender?:User
 
     @Column({
         type: DataType.STRING,
@@ -29,5 +29,5 @@ export class Invitation extends Model<Invitation> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }

@@ -9,19 +9,19 @@ export class Permission extends Model<Permission> {
     //--------------------many to one
     @ForeignKey(() => User)
     @Column
-    user_id: number;
+    user_id?: number;
 
     @BelongsTo(() => User)
-    user:User
+    user?:User
     //--------------------
 
     //--------------------many to one
     @ForeignKey(() => Item)
     @Column
-    item_id: number;
+    item_id?: number;
 
     @BelongsTo(() => Item)
-    item:Item
+    item?:Item
     //--------------------
 
     @Column({
@@ -36,6 +36,6 @@ export class Permission extends Model<Permission> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
 }

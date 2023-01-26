@@ -14,6 +14,6 @@ export class Chartcategory extends Model<Chartcategory> {
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 
 }

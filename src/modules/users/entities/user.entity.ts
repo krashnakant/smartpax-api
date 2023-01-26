@@ -43,15 +43,15 @@ export class User extends Model<User> {
     items?: Item[]
 
     @HasMany(() => GColumn)
-    columns: GColumn[]
+    columns?: GColumn[]
 
     @HasMany(() => Defaultcolumn)
-    defaultcolumns: Defaultcolumn[]
+    defaultcolumns?: Defaultcolumn[]
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
         defaultValue:false
     })
-    delete_status: boolean;
+    delete_status?: boolean;
 }
