@@ -1,5 +1,5 @@
 export class CreateGroupDto {
-    readonly name: string;
+    readonly title: string;
     readonly item_id: number;
     readonly columns: any[];
     readonly rows:any[];
