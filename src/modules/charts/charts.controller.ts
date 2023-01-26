@@ -10,8 +10,8 @@ export class ChartsController {
   constructor(private readonly chartsService: ChartsService) {}
 
   @Post()
-  create(@Body() createChartDto: CreateChartDto) {
-    return this.chartsService.create(createChartDto);
+  create(@Body() createChartDto: any) {
+    return this.chartsService.create(createChartDto.data);
   }
 
   @Get()

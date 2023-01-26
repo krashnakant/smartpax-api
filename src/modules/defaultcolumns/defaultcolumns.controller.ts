@@ -10,8 +10,8 @@ export class DefaultcolumnsController {
   constructor(private readonly defaultcolumnsService: DefaultcolumnsService) {}
 
   @Post()
-  create(@Body() createDefaultcolumnDto: CreateDefaultcolumnDto) {
-    return this.defaultcolumnsService.create(createDefaultcolumnDto);
+  create(@Body() createDefaultcolumnDto: any) {
+    return this.defaultcolumnsService.create(createDefaultcolumnDto.data);
   }
 
   @Get()

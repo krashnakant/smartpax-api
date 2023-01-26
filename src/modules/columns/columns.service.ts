@@ -22,15 +22,15 @@ export class ColumnsService {
   }
 
   async findOneById(id: number): Promise<GColumn> {
-    return await this.columnRepository.findOne<GColumn>({ where: { id }, include:[this.dropdownRepository, this.peopleRepository, this.statusRepository] });
+    return await this.columnRepository.findOne<GColumn>({ where: { id, delete_status:false }, include:[this.dropdownRepository, this.peopleRepository, this.statusRepository] });
   }
 
   async findAll(): Promise<GColumn[]> {
-    return await this.columnRepository.findAll<GColumn>({include:[this.dropdownRepository, this.peopleRepository, this.statusRepository]});
+    return await this.columnRepository.findAll<GColumn>({where: { delete_status:false }, include:[this.dropdownRepository, this.peopleRepository, this.statusRepository]});
   }
 
   async findAllByItemId(item_id: number): Promise<GColumn[]> {
-    return await this.columnRepository.findAll<GColumn>({where: { item_id },include:[this.dropdownRepository, this.peopleRepository, this.statusRepository],order :[['order','ASC']]});
+    return await this.columnRepository.findAll<GColumn>({where: { item_id, delete_status:false },include:[this.dropdownRepository, this.peopleRepository, this.statusRepository],order :[['order','ASC']]});
   }
 
   findOne(id: number) {
@@ -42,6 +42,10 @@ export class ColumnsService {
   }
 
   async remove(id: number) {
-    return await this.columnRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.columnRepository.update<GColumn>(data, {where: {id}});
+    // return await this.columnRepository.destroy({where: {id}})
   }  
 }

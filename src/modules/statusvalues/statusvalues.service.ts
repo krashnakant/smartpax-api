@@ -14,15 +14,15 @@ export class StatusvaluesService {
   }
 
   async findOneById(id: number): Promise<Statusvalue> {
-    return await this.statusvalueRepository.findOne<Statusvalue>({ where: { id } });
+    return await this.statusvalueRepository.findOne<Statusvalue>({ where: { id, delete_status:false } });
   }
 
   async findAll(): Promise<Statusvalue[]> {
-    return await this.statusvalueRepository.findAll<Statusvalue>();
+    return await this.statusvalueRepository.findAll<Statusvalue>({ where: { delete_status:false } });
   }
 
   async findAllByStatusId(status_id: number): Promise<Statusvalue[]> {
-    return await this.statusvalueRepository.findAll<Statusvalue>({ where: { status_id } });
+    return await this.statusvalueRepository.findAll<Statusvalue>({ where: { status_id, delete_status:false } });
   }  
 
   findOne(id: number) {
@@ -34,6 +34,10 @@ export class StatusvaluesService {
   }
 
   async remove(id: number) {
-    return await this.statusvalueRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.statusvalueRepository.update<Statusvalue>(data, {where: {id}});
+    // return await this.statusvalueRepository.destroy({where: {id}})
   }
 }

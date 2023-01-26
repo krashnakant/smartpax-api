@@ -14,7 +14,7 @@ export class InvitationitemsService {
   }
 
   async findAll(): Promise<Invitationitem[]> {
-    return await this.invitationitemRepository.findAll<Invitationitem>();
+    return await this.invitationitemRepository.findAll<Invitationitem>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -26,6 +26,10 @@ export class InvitationitemsService {
   }
 
   async remove(id: number) {
-    return await this.invitationitemRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.invitationitemRepository.update<Invitationitem>(data, {where: {id}});
+    // return await this.invitationitemRepository.destroy({where: {id}})
   }
 }

@@ -18,11 +18,11 @@ export class DropdownsService {
   }
 
   async findOneById(id: number): Promise<Dropdown> {
-    return await this.dropdownRepository.findOne<Dropdown>({ where: { id }, include:[this.dropdownvalueRepository] });
+    return await this.dropdownRepository.findOne<Dropdown>({ where: { id, delete_status: false }, include:[this.dropdownvalueRepository] });
   }
 
   async findAll(): Promise<Dropdown[]> {
-    return await this.dropdownRepository.findAll<Dropdown>({include:[this.dropdownvalueRepository]});
+    return await this.dropdownRepository.findAll<Dropdown>({where: { delete_status: false }, include:[this.dropdownvalueRepository]});
   }
 
   findOne(id: number) {
@@ -34,6 +34,10 @@ export class DropdownsService {
   }
 
   async remove(id: number) {
-    return await this.dropdownRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.dropdownRepository.update<Dropdown>(data, {where: {id}});
+    // return await this.dropdownRepository.destroy({where: {id}})
   }
 }

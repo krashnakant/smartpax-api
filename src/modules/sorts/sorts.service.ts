@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { where } from 'sequelize';
 import { SORT_REPOSITORY } from 'src/core/constants';
 import { CreateSortDto } from './dto/create-sort.dto';
 import { UpdateSortDto } from './dto/update-sort.dto';
@@ -14,7 +15,7 @@ export class SortService {
   }
 
   async findAll(): Promise<Sort[]> {
-    return await this.sortRepository.findAll<Sort>();
+    return await this.sortRepository.findAll<Sort>({ where: { delete_status:false } });
   }
 
 
@@ -27,6 +28,10 @@ export class SortService {
   }
 
   async remove(id: number) {
-    return await this.sortRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.sortRepository.update<Sort>(data, {where: {id}});
+    // return await this.sortRepository.destroy({where: {id}})
   }
 }

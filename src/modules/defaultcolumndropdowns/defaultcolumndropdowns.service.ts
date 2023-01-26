@@ -14,7 +14,7 @@ export class DefaultcolumndropdownsService {
   }
 
   async findAll(): Promise<Defaultcolumndropdown[]> {
-    return await this.defaultcolumndropdownRepository.findAll<Defaultcolumndropdown>();
+    return await this.defaultcolumndropdownRepository.findAll<Defaultcolumndropdown>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -26,6 +26,10 @@ export class DefaultcolumndropdownsService {
   }
 
   async remove(id: number) {
-    return await this.defaultcolumndropdownRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.defaultcolumndropdownRepository.update<Defaultcolumndropdown>(data, {where: {id}});
+    // return await this.defaultcolumndropdownRepository.destroy({where: {id}})
   }  
 }

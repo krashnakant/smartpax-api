@@ -26,7 +26,7 @@ export class DefaultcolumnsService {
   }
 
   async findAll(): Promise<Defaultcolumn[]> {
-    return await this.defaultColumnRepository.findAll<Defaultcolumn>();
+    return await this.defaultColumnRepository.findAll<Defaultcolumn>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -38,6 +38,10 @@ export class DefaultcolumnsService {
   }
 
   async remove(id: number) {
-    return await this.defaultColumnRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.defaultColumnRepository.update<Defaultcolumn>(data, {where: {id}});
+    // return await this.defaultColumnRepository.destroy({where: {id}})
   }
 }

@@ -14,7 +14,7 @@ export class DefaultcolumnpeopleService {
   }
 
   async findAll(): Promise<Defaultcolumnperson[]> {
-    return await this.defaultcolumnpersonRepository.findAll<Defaultcolumnperson>();
+    return await this.defaultcolumnpersonRepository.findAll<Defaultcolumnperson>({where: {delete_status:false}});
   }
 
   findOne(id: number) {
@@ -26,6 +26,10 @@ export class DefaultcolumnpeopleService {
   }
 
   async remove(id: number) {
-    return await this.defaultcolumnpersonRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.defaultcolumnpersonRepository.update<Defaultcolumnperson>(data, {where: {id}});
+    // return await this.defaultcolumnpersonRepository.destroy({where: {id}})
   }  
 }

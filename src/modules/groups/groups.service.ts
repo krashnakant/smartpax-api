@@ -19,7 +19,7 @@ export class GroupsService {
   }
 
   async findAllGroups(item_id: number): Promise<Group[]> {
-    let groups = await this.groupRepository.findAll<Group>({where: {item_id}, order:[['id','DESC']]}) 
+    let groups = await this.groupRepository.findAll<Group>({where: {item_id, delete_status:false}, order:[['id','DESC']]}) 
     return groups;
   }
 
@@ -36,6 +36,10 @@ export class GroupsService {
   }
 
   async remove(id: number) {
-    return await this.groupRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.groupRepository.update<Group>(data, {where: {id}});
+    // return await this.groupRepository.destroy({where: {id}})
   }
 }

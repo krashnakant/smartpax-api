@@ -18,11 +18,11 @@ export class StatusesService {
   }
 
   async findOneById(id: number): Promise<Status> {
-    return await this.statusRepository.findOne<Status>({ where: { id }, include:[this.statusvalueRepository] });
+    return await this.statusRepository.findOne<Status>({ where: { id, delete_status:false }, include:[this.statusvalueRepository] });
   }
 
   async findAll(): Promise<Status[]> {
-    return await this.statusRepository.findAll<Status>({include:[this.statusvalueRepository]});
+    return await this.statusRepository.findAll<Status>({ where: { delete_status:false }, include:[this.statusvalueRepository]});
   }
 
   findOne(id: number) {
@@ -34,6 +34,10 @@ export class StatusesService {
   }
 
   async remove(id: number) {
-    return await this.statusRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.statusRepository.update<Status>(data, {where: {id}});
+    // return await this.statusRepository.destroy({where: {id}})
   }
 }

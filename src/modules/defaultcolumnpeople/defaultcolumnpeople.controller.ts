@@ -10,8 +10,8 @@ export class DefaultcolumnpeopleController {
   constructor(private readonly defaultcolumnpeopleService: DefaultcolumnpeopleService) {}
 
   @Post()
-  create(@Body() createDefaultcolumnpersonDto: CreateDefaultcolumnpersonDto) {
-    return this.defaultcolumnpeopleService.create(createDefaultcolumnpersonDto);
+  create(@Body() createDefaultcolumnpersonDto: any) {
+    return this.defaultcolumnpeopleService.create(createDefaultcolumnpersonDto.data);
   }
 
   @Get()

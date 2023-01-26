@@ -14,7 +14,7 @@ export class ChartsettingsService {
   }
 
   async findAll(): Promise<Chartsetting[]> {
-    return await this.chartsettingRepository.findAll<Chartsetting>();
+    return await this.chartsettingRepository.findAll<Chartsetting>({where: {delete_status:false}});
   }
 
 
@@ -27,6 +27,10 @@ export class ChartsettingsService {
   }
 
   async remove(id: number) {
-    return await this.chartsettingRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.chartsettingRepository.update<Chartsetting>(data, {where: {id}});
+    // return await this.chartsettingRepository.destroy({where: {id}})
   }  
 }

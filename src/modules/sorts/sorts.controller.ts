@@ -10,8 +10,8 @@ export class SortController {
   constructor(private readonly sortService: SortService) {}
 
   @Post()
-  create(@Body() createSortDto: CreateSortDto) {
-    return this.sortService.create(createSortDto);
+  create(@Body() createSortDto: any) {
+    return this.sortService.create(createSortDto.data);
   }
 
   @Get()

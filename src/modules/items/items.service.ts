@@ -45,11 +45,11 @@ export class ItemsService {
   }
 
   async findAll(): Promise<Item[]> {
-    return await this.itemRepository.findAll<Item>();
+    return await this.itemRepository.findAll<Item>({where: {delete_status:false}});
   }
 
   async findAllItems(user_id: number, item_type: string): Promise<Item[]> {
-    let items = await this.itemRepository.findAll<Item>({where: {user_id}})    
+    let items = await this.itemRepository.findAll<Item>({where: {user_id, delete_status:false}})    
     let itemtypes = items.filter((item) => item.item_type == item_type)
     let allitems = itemtypes.map((item) => {
       let children = items.filter((i) => i.parent_id == item.id)
@@ -65,7 +65,7 @@ export class ItemsService {
   }
 
   async findAllWorkspaces(user_id: number, item_type: string): Promise<any> {
-    const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, item_type: 'workspace'}});    
+    const workspaces:Item[] = await this.itemRepository.findAll<Item>({where: {user_id, delete_status:false, item_type: 'workspace'}});    
     let responseJSON = {data :{ "user_id": user_id, "workspace": workspaces, "dashboard": [], status: 200 }};
     return responseJSON; 
   }
@@ -79,6 +79,10 @@ export class ItemsService {
   }
 
   async remove(id: number) {
-    return await this.itemRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.itemRepository.update<Item>(data, {where: {id}});
+    // return await this.itemRepository.destroy({where: {id}})
   }  
 }

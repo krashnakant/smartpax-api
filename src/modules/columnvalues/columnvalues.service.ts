@@ -14,10 +14,10 @@ export class ColumnvaluesService {
   }
 
   async findAll(): Promise<Columnvalue[]> {
-    return await this.columnvalueRepository.findAll<Columnvalue>();
+    return await this.columnvalueRepository.findAll<Columnvalue>({where: {delete_status:false}});
   }
   async findAllByGroupId(group_id: number): Promise<Columnvalue[]> {
-    return await this.columnvalueRepository.findAll<Columnvalue>({where: { group_id }});
+    return await this.columnvalueRepository.findAll<Columnvalue>({where: { group_id, delete_status:false }});
   }
 
   async update(id: number, updateColumnvalueDto: UpdateColumnvalueDto) {
@@ -25,7 +25,11 @@ export class ColumnvaluesService {
   }
 
   async remove(id: number) {
-    return await this.columnvalueRepository.destroy({where: {id}})
+    let data = {
+      delete_status:true
+    }
+    return await this.columnvalueRepository.update<Columnvalue>(data, {where: {id}});
+    // return await this.columnvalueRepository.destroy({where: {id}})
   }
 
   findOne(id: number) {
